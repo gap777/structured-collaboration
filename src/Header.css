@@ -1,0 +1,11 @@
+.header{
+    background-color: #67AAF9;
+    height: 45px;
+    width: 100%;
+}
+
+.sessionNumber{
+    display: inline-block;
+    margin-left:90%;
+    margin-top:14px;
+}
