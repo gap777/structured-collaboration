@@ -26,10 +26,7 @@ app.post('/api/meeting/:meetingId/participants', (req, res) => {
   console.log(`Joining meeting ${meetingId}`);
   res.send({
     meetingId: meetingId,
-    participantId: participantId,
-    participants: [
-      participantId
-    ]
+    participantId: participantId
   });
 });
 
