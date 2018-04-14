@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './App.css';
+import './css/App.css';
 import LandingPage from './LandingPage';
 import FacilitatorView from './FacilitatorView';
 import ParticipantView from './ParticipantView';
