@@ -1,20 +1,21 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
-import MeetingView from './MeetingView';
+import LandingPage from './LandingPage';
+import FacilitatorView from './FacilitatorView';
+import ParticipantView from './ParticipantView';
+import { BrowserRouter as Router, Route } from "react-router-dom";
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-        <MeetingView/>
+        <Router>
+          <React.Fragment>
+            <Route exact path="/" component={LandingPage} />
+            <Route exact path="/:meetingId/facilitate" component={FacilitatorView} />
+            <Route exact path="/:meetingId/participate" component={ParticipantView} />
+          </React.Fragment>
+        </Router>
       </div>
     );
   }
