@@ -30,6 +30,12 @@ app.post('/api/meeting/:meetingId/participants', (req, res) => {
   });
 });
 
+api.get('/api/meeting/:meetingId/participants', (req, res) => {
+  res.send({
+    participants: 4
+  });
+});
+
 const port = process.env.PORT || 3001;
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
