@@ -4,7 +4,12 @@
   "description": "API server for structured-collaboration tool",
   "main": "src/server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "preinstall": "cd client && npm install",
+    "client": "cd client && npm start",
+    "server": "node src/server.js",
+    "start": "if [ \"$NODE_ENV\" = \"production\" ]; then npm run start:prod; else npm run start:dev; fi",
+    "start:dev": "concurrently \"npm run server\" \"npm run client\"",
+    "start:prod": "NODE_ENV=production \"npm run server\""
   },
   "repository": {
     "type": "git",
@@ -19,5 +24,8 @@
   "dependencies": {
     "express": "^4.16.3",
     "mongoose": "^5.0.14"
+  },
+  "devDependencies": {
+    "concurrently": "^3.5.1"
   }
 }
