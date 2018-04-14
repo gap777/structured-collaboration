@@ -30,7 +30,7 @@ app.post('/api/meeting/:meetingId/participants', (req, res) => {
   });
 });
 
-api.get('/api/meeting/:meetingId/participants', (req, res) => {
+app.get('/api/meeting/:meetingId/participants', (req, res) => {
   res.send({
     participants: 4
   });
