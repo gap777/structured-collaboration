@@ -17,13 +17,18 @@ class LandingPage extends Component {
   }
 
   async startMeeting() {
-    const response = await fetch(
-      "/api/meeting",
-      {
-        method: "POST"
-      });
-    const json = await response.json();
-    this.props.history.push(`/${json.meetingId}/facilitate`);
+      try {
+          const json = await response.json();
+          const response = await fetch(
+              "/api/meeting",
+              {
+                  method: "POST"
+              });
+          this.props.history.push(`/${json.meetingId}/facilitate`);
+      }  catch(err){
+          alert("There is currently an error with the server. We're sorry for your inconvenience.");
+          return;
+      }
   }
 
   async joinMeeting() {
