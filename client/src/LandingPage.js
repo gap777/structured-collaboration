@@ -1,31 +1,37 @@
 import React, { Component } from 'react';
 
 class LandingPage extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            inputValue: ''
-        };
-    }
+  constructor(props) {
+      super(props);
+      this.startMeeting = this.startMeeting.bind(this);
+      this.state = {
+          inputValue: ''
+      };
+  }
 
-    updateInputValue(event){
-        this.setState({
-           inputValue: event.target.value
-        });
-    }
+  updateInputValue(event){
+      this.setState({
+         inputValue: event.target.value
+      });
+  }
 
-    generateRandomNum(){
-        return Math.floor(1000 + Math.random() * 9000);
-    }
+  async startMeeting() {
+    const response = await fetch(
+      "/create-meeting",
+      {
+        method: "POST"
+      });
+    const json = await response.json();
+    this.props.history.push(`/${json.meetingId}/facilitate`);
+  }
+
   render() {
 
     return (
       <div className="launch">
         <div className="launchBlock">
         	<h1>Start a Meeting</h1>
-        	<button className="btn"
-                onClick={() => {
-                this.props.history.push(`/${this.generateRandomNum()}/facilitate`)}}
+        	<button className="btn" onClick={this.startMeeting}
             >Start</button>
         </div>
         <div className="launchBlock">
