@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 
 class LandingPage extends Component {
     constructor(props) {
@@ -24,14 +23,20 @@ class LandingPage extends Component {
       <div className="launch">
         <div className="launchBlock">
         	<h1>Start a Meeting</h1>
-        	<button className="btn" to={`/${this.generateRandomNum()}/facilitate`}>Start</button>
+        	<button className="btn"
+                onClick={() => {
+                this.props.history.push(`/${this.generateRandomNum()}/facilitate`)}}
+            >Start</button>
         </div>
         <div className="launchBlock">
         	<h1>Join a Meeting</h1>
         	<input type='text' onChange={event => this.updateInputValue(event)} />
             <br/>
             <br/>
-        	<button className="btn" to={`/${this.state.inputValue}/participate`}>Join Meeting</button>
+        	<button className="btn"
+                onClick={() => {
+                this.props.history.push(`/${this.state.inputValue}/participate`)}}to={`/${this.state.inputValue}/participate`}
+            >Join Meeting</button>
         </div>
       </div>
     );
