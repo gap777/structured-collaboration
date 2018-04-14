@@ -3,10 +3,11 @@ import Header from './Header.js'
 
 class ParticipantView extends Component {
   render() {
+    const participantId = parseInt(sessionStorage.getItem('participantId'), 10);
     return (
       <React.Fragment>
         <Header sessionNumber={this.props.match.params.meetingId}/>
-        <p>Please wait for a question</p>
+        <p>Participant {participantId}, please wait for a question....</p>
       </React.Fragment>
     );
   }
