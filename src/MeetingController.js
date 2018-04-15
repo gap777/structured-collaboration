@@ -2,6 +2,7 @@
 const Meeting = require('./models/Meeting');
 const Participant = require('./models/Participant');
 const Question = require('./models/Question');
+const Response = require('./models/Response');
 const WebSocket = require('ws');
 
 class MeetingController {
@@ -26,8 +27,13 @@ class MeetingController {
       return numOfDuplicates === 0;
   }
 
-  async broadcast(meetingId, data) {
+  broadcast(meetingId, data) {
     const participants = this.clients.get(meetingId);
+    if (!participants) {
+      console.error(`Unable to find any registered clients for meeting ${meetingId}`);
+      return;
+    }
+
     participants.forEach(client => {
       if (client.readyState === WebSocket.OPEN) {
         client.send(data);
@@ -39,7 +45,7 @@ class MeetingController {
     try {
       const participantIds = await this._getParticipantsFromDB(meetingId);
       const data = JSON.stringify({ participants: participantIds.length });
-      await this.broadcast(meetingId, data);
+      this.broadcast(meetingId, data);
     } catch (error) {
       console.log(error);
     }
@@ -144,25 +150,46 @@ class MeetingController {
   async addQuestion(httpRequest, httpResponse) {
     const meetingId = parseInt(httpRequest.params.meetingId, 10);
     const questionText = httpRequest.body.questionText;
-    const question = await this._addQuestionToDb(meetingId, questionText);
-    const questionId = question._id;
-    console.log(`Created new question ${questionId} for meeting ${meetingId}`);
-    this.broadcastQuestionText(meetingId, questionId, questionText);
-    httpResponse.send({
-      questionId: questionId
-    });
-  }
-
-  async broadcastQuestionText(meetingId, questionId, questionText) {
     try {
-      const data = JSON.stringify({
-        questionId: questionId,
-        questionText: questionText
+      const question = await this._addQuestionToDb(meetingId, questionText);
+      const questionId = question._id;
+      console.log(`Created new question ${questionId} for meeting ${meetingId}`);
+      this.broadcastQuestionText(meetingId, questionId, questionText);
+      httpResponse.send({
+        questionId: questionId
       });
-      await this.broadcast(meetingId, data);
     } catch (error) {
       console.log(error);
     }
+  }
+
+  async getQuestions(httpRequest, httpResponse) {
+    const meetingId = parseInt(httpRequest.params.meetingId, 10);
+
+    try {
+      const questions = await Question.find({meetingId: meetingId});
+      const responsePromises = [];
+      questions.forEach(q => {
+        const nextPromise = Response.find({questionId: q.questionId})
+                                    .then(responses => q.responses = responses);
+        responsePromises.push(nextPromise);
+      });
+      Promise.all(responsePromises);
+
+      httpResponse.send({
+        questions: questions
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async broadcastQuestionText(meetingId, questionId, questionText) {
+    const data = JSON.stringify({
+      questionId: questionId,
+      questionText: questionText
+    });
+    this.broadcast(meetingId, data);
   }
 }
 

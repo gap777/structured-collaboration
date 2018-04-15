@@ -9,7 +9,7 @@ class ParticipantView extends Component {
   constructor(props) {
     super(props);
     this.updateParticipantCount = this.updateParticipantCount.bind(this);
-    this.state = {};
+
   }
 
   componentWillMount() {
