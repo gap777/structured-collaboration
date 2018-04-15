@@ -103,7 +103,7 @@ class ParticipantView extends Component {
                 meetingId={this._meetingId()}/>
         <div className="waitingView grey">
             <FeatherIcon className="spin iconSVG" icon="loader" />
-            <div className="iconLabel">Hey Participant {participantId}, please wait for a question....</div>   
+            <div className="iconLabel">Hey Participant {this.state.participantId}, please wait for a question....</div>
         </div>
 
         {/* Question Present*/}
