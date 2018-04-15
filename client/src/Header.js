@@ -38,12 +38,12 @@ class Header extends Component {
         <div className="header">
             
             <div className="sessionBlock">
-                <FeatherIcon icon="message-circle" />
+                <FeatherIcon className="iconSVG" icon="message-circle" />
                 Decision JAM - {this.props.sessionNumber}
             </div>
                 
             <div className="participantBlock">
-                <FeatherIcon icon="user" />
+                <FeatherIcon className="iconSVG" icon="user" />
                 {this.state.numberParticipants || 0}
             </div>
 
