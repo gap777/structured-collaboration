@@ -10,22 +10,22 @@ class MeetingController {
 
   async generateNewParticipantId(meetingId) {
     const participantIds = await this._getParticipantsFromDB(meetingId);
-    const biggestIdentifier = Math.max.apply(null, participantIds);
+    const biggestIdentifier = Math.max(0, ...participantIds);
     return biggestIdentifier + 1;
   }
 
   async createMeeting(httpRequest, httpResponse) {
     try {
-      console.log(`Creating new meeting ${meetingId}`);
       const meetingId = this.generateNewMeetingId();
       const meetingSavePromise = this._storeMeetingInDB();
 
-      const participantId = await this.generateNewParticipantId();
+      const participantId = await this.generateNewParticipantId(meetingId);
       const participantSavePromise = this._addParticipantToDB(meetingId, participantId);
 
       await meetingSavePromise;
       await participantSavePromise;
 
+      console.log(`Created new meeting ${meetingId}`);
       httpResponse.send({
         meetingId: meetingId,
         participantId: participantId
@@ -66,11 +66,15 @@ class MeetingController {
 
   async getParticipantCount(httpRequest, httpResponse) {
     const meetingId = httpRequest.params.meetingId;
-
-    const participantIds = await this._getParticipantsFromDB(meetingId);
-
+    let numParticipants = 0;
+    try {
+      const participantIds = await this._getParticipantsFromDB(meetingId);
+      numParticipants = participantIds.length;
+    } catch (error) {
+      console.log(error);
+    }
     httpResponse.send({
-      participants: participantIds.length
+      participants: numParticipants
     });
   }
 
