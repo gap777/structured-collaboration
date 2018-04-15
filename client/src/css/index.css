@@ -140,6 +140,15 @@ input[type="text"]{
 
 .answer {
     text-align: left;
+    height: 36px;
 }
 
-.answerActions{ }
+.answer p{ 
+    display: inline-block;
+}
+
+.answer .iconSVG{
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 10px;
+}
