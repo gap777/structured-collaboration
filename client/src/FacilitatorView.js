@@ -23,11 +23,14 @@ class FacilitatorView extends Component {
                     <div className="questionTitle">          
                         <h1>What are your biggest pain points related to this project?</h1>
                     </div>
-                    <div className="questionStatus">
-                        <FeatherIcon icon="clock" />
-                    </div>
+                    
                     <div className="questionActions">
+                        <div className="questionStatus yellow">
+                            <FeatherIcon className="spin" icon="loader" />
+                            <div className="iconLabel">X of X Responses Received</div>
+                        </div>                
                         <button className="btn" >End</button>
+                        
                     </div>
                 </div>
         

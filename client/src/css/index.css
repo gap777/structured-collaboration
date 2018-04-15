@@ -9,6 +9,10 @@ h1 {
 	font-size: 18px;
 }
 
+.yellow {
+    color: #FFB90F;
+}
+
 .btn {
   -webkit-border-radius: 3;
   -moz-border-radius: 3;
@@ -57,6 +61,21 @@ input[type="text"]{
   fill: none;
 }
 
+.iconLabel{
+    margin-top: -15px;
+    display: inline-block;
+    padding-left: 8px;
+}
+
+.spin {
+  animation: spin 2s infinite linear;
+}
+
+@keyframes spin {
+    from {transform:rotate(0deg);}
+    to {transform:rotate(360deg);}
+}
+
 /***** LAUNCH PAGE **************/
 
 .launch{
@@ -99,11 +118,13 @@ input[type="text"]{
 }
 
 .questionStatus{
-    
+    display: inline-block;
+    padding-right: 20px;
 }
 
 .questionActions{
     float: right;
+    margin-top: 10px;
 }
 
 /***** ANSWERS **************/
