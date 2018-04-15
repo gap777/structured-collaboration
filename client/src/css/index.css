@@ -43,10 +43,7 @@ input[type="text"]{
     -webkit-box-shadow: 0px 3px 15px 0px rgba(0,0,0,0.2);
     -moz-box-shadow: 0px 3px 15px 0px rgba(0,0,0,0.2);
     box-shadow: 0px 3px 15px 0px rgba(0,0,0,0.2);
-    padding: 10px 20px 20px;
-    -webkit-border-radius: 6;
-    -moz-border-radius: 6;
-    border-radius: 6px;
+    padding: 10px 3% 20px;
     overflow:auto;    
 }
 
@@ -110,10 +107,6 @@ input[type="text"]{
 
 .question {
     max-width: 600px;
-    
-    -webkit-border-radius: 6;
-    -moz-border-radius: 6;
-    border-radius: 6px;
     margin: 20px auto 0;
 }
 
@@ -134,8 +127,9 @@ input[type="text"]{
 /***** ANSWERS **************/
 
 .answerList {
-    text-align: left;
-    margin-top: 20px;
+    list-style: none;
+    padding-left:0;
+    margin-top:0;
 }
 
 .answer {
@@ -143,3 +137,19 @@ input[type="text"]{
 }
 
 .answerActions{ }
+
+.responses {
+    padding: 10px 3% 20px;
+}
+
+.responsesTitle {
+    text-align: left;
+    margin:30px 0 0;
+    padding-left:5px;
+    color:#888;
+}
+
+.responses .answer {
+    border-bottom: 1px solid #ddd;
+    padding:8px 5px;
+}
