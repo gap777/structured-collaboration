@@ -1,13 +1,19 @@
 .header{
     background-color: #67AAF9;
+    position:absolute;
+    top:0;
     height: 45px;
     width: 100%;
-    margin-bottom: 20px;
 }
 
 .sessionNumber{
     display: inline-block;
     position: absolute;
-    right: 10px;
+    left: 10px;
     margin-top:14px;
+}
+
+.participantNumber{
+    position:absolute;
+    right: 10px;
 }
