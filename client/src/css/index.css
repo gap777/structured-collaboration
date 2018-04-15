@@ -145,12 +145,15 @@ input[type="text"]{
     display: inline-block;
     vertical-align: middle;
     margin-left: 10px;
+    color: #3498db;
 }
 
 .answerActions{ }
 
 .responses {
     padding: 10px 3% 20px;
+    margin: 20px auto 0;
+    max-width:600px;
 }
 
 .responsesTitle {
@@ -163,4 +166,8 @@ input[type="text"]{
 .responses .answer {
     border-bottom: 1px solid #ddd;
     padding:8px 5px;
+}
+
+.responses .answer:last-child {
+    border-bottom: none;
 }

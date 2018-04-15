@@ -10,98 +10,98 @@ class FacilitatorView extends Component {
           <Header meetingId={this.props.match.params.meetingId}/>
 
             <div className="questionList">
-                
+
                 <button className="btn">+ Add a Question</button>
-                
-                <div className="card question"> 
+
+                <div className="card question">
                     <input type='text' placeholder="Type your question" />
                     <div className="questionActions">
                         <button className="btn" >Submit</button>
                     </div>
                 </div>
-        
-                <div className="card question"> 
-                    <div className="questionTitle">          
+
+                <div className="card question">
+                    <div className="questionTitle">
                         <h1>What are your biggest pain points related to this project?</h1>
                     </div>
-                    
+
                     <div className="questionActions">
                         <div className="questionStatus yellow">
                             <FeatherIcon className="spin iconSVG" icon="loader" />
-                            <div className="iconLabel">X of X People Responsed</div>
-                        </div>                
+                            <div className="iconLabel">X of X People Responded</div>
+                        </div>
                         <button className="btn" >End</button>
-                        
+
                     </div>
                 </div>
-        
-                <div className="card question"> 
-                    <div className="questionTitle">          
+
+                <div className="card responses">
+                    <div className="questionTitle">
                         <h1>What are your biggest pain points related to this project?</h1>
                     </div>
-                    <div className="answerList">
-                        <p>RESPONSES</p>
-                        <div className="answer">
+                    <p className="responsesTitle">RESPONSES:</p>
+                    <ul className="answerList">
+                        <li className="answer">
                             <p>Squirrels</p>
-                        </div>
-                        <div className="answer">
+                        </li>
+                        <li className="answer">
                             <p>Its cold outside.</p>
-                        </div>
-                        <div className="answer">
+                        </li>
+                        <li className="answer">
                             <p>Not enough snacks</p>
-                        </div>
-                        <div className="answer">
+                        </li>
+                        <li className="answer">
                             <p>Lack of coordination</p>
-                        </div>
-                        <div className="answer">
+                        </li>
+                        <li className="answer">
                             <p>I dunno</p>
-                        </div>
-                        <div className="answer">
+                        </li>
+                        <li className="answer">
                             <p>Changing timelines</p>
-                        </div>
-                    </div>
+                        </li>
+                    </ul>
                     <div className="questionActions">
                         <button className="btn">Share</button>
                     </div>
                 </div>
-        
-                <div className="card question"> 
-                    <div className="questionTitle">          
+
+                <div className="card responses">
+                    <div className="questionTitle">
                         <h1>What are your biggest pain points related to this project?</h1>
                     </div>
-                    <div className="answerList">
-                        <p>RESPONSES</p>
-                        <div className="answer">
+                    <p className="responsesTitle">RESPONSES:</p>
+                    <ul className="answerList">
+                        <li className="answer">
                             <p>Lack of coordination</p>
                             <FeatherIcon className="iconSVG" icon="star" />
                             <FeatherIcon className="iconSVG" icon="star" />
                             <FeatherIcon className="iconSVG" icon="star" />
-                        </div>
-                        <div className="answer">
-                            <p>Changing timelines</p>
-                            <FeatherIcon className="iconSVG" icon="star" />
-                            <FeatherIcon className="iconSVG" icon="star" />
-                        </div>
-                        <div className="answer">
+                        </li>
+
+                        <li className="answer">
                             <p>Not enough snacks</p>
                             <FeatherIcon className="iconSVG" icon="star" />
-                        </div>
-                        <div className="answer">
+                            <FeatherIcon className="iconSVG" icon="star" />
+                        </li>
+                        <li className="answer">
+                            <p>Changing timelines</p>
+                            <FeatherIcon className="iconSVG" icon="star" />
+                        </li>
+                        <li className="answer">
                             <p>Squirrels</p>
-                        </div>
-                        <div className="answer">
+                        </li>
+                        <li className="answer">
                             <p>I dunno</p>
-                        </div>
-                        <div className="answer">
+                        </li>
+                        <li className="answer">
                             <p>Its cold outside.</p>
-                        </div>
-                        
-                    </div>
+                        </li>
+                    </ul>
                     <div className="questionActions">
                         <button className="btn">Share</button>
                     </div>
                 </div>
-        
+
             </div>
       </React.Fragment>
     );
