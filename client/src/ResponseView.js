@@ -21,14 +21,22 @@ class ResponseView extends Component {
                     <p className="responsesTitle">RESPONSES:</p>
                     <ul className="answerList">
                         <li className="answer">
-                            <p>Response to the question</p>
+                            <p>Squirrels</p>
                         </li>
                         <li className="answer">
-                            <p>Longer response to the question</p>git
+                            <p>Its cold outside.</p>
                         </li>
                         <li className="answer">
-                            <p>The biggest pain point is that the program is too slow.</p>
-
+                            <p>Not enough snacks</p>
+                        </li>
+                        <li className="answer">
+                            <p>Lack of coordination</p>
+                        </li>
+                        <li className="answer">
+                            <p>I dunno</p>
+                        </li>
+                        <li className="answer">
+                            <p>Changing timelines</p>
                         </li>
                     </ul>
                 </div>
