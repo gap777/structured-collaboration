@@ -9,10 +9,24 @@ class FacilitatorView extends Component {
   constructor(props){
     super(props);
     this.state = ({
-        questions : []
+      questions: [
+        {
+          questionText: "What are your biggest pain points related to this project?",
+          questionId: 123,
+          responses:    [
+            "Squirrels",
+            "Its cold outside",
+            "Not enough snacks",
+            "Lack of coordination",
+            "I dunno",
+            "Changing timelines"
+          ]
+        }
+      ]
     });
     this.addQuestion = this.addQuestion.bind(this);
   }
+
 
   componentWillMount() {
     const socket = new ParticipantSocket(this._meetingId());
@@ -32,19 +46,22 @@ class FacilitatorView extends Component {
   addQuestion() {
     this.setState({
       questions: [
-        {},
+        {
+          questionId: undefined,
+          questionText: undefined,
+          responses: []
+        },
         ...this.state.questions
       ]
     });
   }
 
   _renderQuestions() {
-    return this.state.questions.map((question,index) => (
-      <QuestionBlock key={index}
-                     meetingId={this._meetingId()}
-                     questionId={question.questionId}
-                     questionText={question.questionText}/>
-      ));
+    return this.state.questions.map((question,index) => {
+      return <QuestionBlock key={index}
+                            meetingId={this._meetingId()}
+                            question={question}/>
+    });
   }
 
   render() {
@@ -70,37 +87,6 @@ class FacilitatorView extends Component {
                         </div>
                         <button className="btn" >End</button>
 
-                    </div>
-                </div>
-
-                <div className="card responses">
-                    <div className="questionTitle">
-                        <h1>What are your biggest pain points related to this project?</h1>
-                    </div>
-                    <p className="responsesTitle">RESPONSES:</p>
-                    <ul className="answerList">
-                        <li className="answer">
-                            <p>Squirrels</p>
-                        </li>
-                        <li className="answer">
-                            <p>Its cold outside.</p>
-                        </li>
-                        <li className="answer">
-                            <p>Not enough snacks</p>
-                        </li>
-                        <li className="answer">
-                            <p>Lack of coordination</p>
-                        </li>
-                        <li className="answer">
-                            <p>I dunno</p>
-                        </li>
-                        <li className="answer">
-                            <p>Changing timelines</p>
-                        </li>
-                    </ul>
-                    <div className="questionActions">
-                        <button className="btn">Just Share</button>
-                        <button className="btn">Send for Ranking</button>
                     </div>
                 </div>
 

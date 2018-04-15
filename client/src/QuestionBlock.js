@@ -1,21 +1,40 @@
 import React, { Component } from 'react';
 import FeatherIcon from 'feather-icons-react';
+import ResponseBlock from './ResponseBlock';
 
 class QuestionBlock extends Component {
+  
   constructor(props){
       super(props);
       this.submitQuestion = this.submitQuestion.bind(this);
       this.showAnswers = this.showAnswers.bind(this);
       this.updateInputTextValue = this.updateInputTextValue.bind(this);
-      this.state = ({
-        text: this.props.questionText || '',
-        questionId: this.props.questionId
-      })
+      this.state = this.makeStateFromProps(this.props);
+  }
+
+  componentWillReceiveProps(newProps) {
+    this.setState(this.makeStateFromProps(newProps));
+  }
+
+  makeStateFromProps(props) {
+    let stateObj;
+    if (props.question) {
+      stateObj = props.question;
+      stateObj.waitingForResponses = false;
+    } else {
+      stateObj = {
+        questionText: '',
+        questionId: undefined,
+        responses: [],
+        waitingForResponses: false
+      }
+    }
+    return stateObj;
   }
 
   updateInputTextValue(event){
       this.setState({
-          text: event.target.value
+        questionText: event.target.value
       });
   }
 
@@ -30,7 +49,7 @@ class QuestionBlock extends Component {
             'Content-Type': 'application/json'
           },
           body: JSON.stringify({
-            questionText: this.state.text
+            questionText: this.state.questionText
           })
         });
       const json = await response.json();
@@ -45,7 +64,7 @@ class QuestionBlock extends Component {
   async submitQuestion() {
     const questionId = await this._addQuestionToServer();
     this.setState({
-      questionMode: false,
+      waitingForResponses: true,
       questionId: questionId
     });
   }
@@ -67,17 +86,36 @@ class QuestionBlock extends Component {
     );
   }
 
-  renderFixedQuestionText() {
+  renderQuestionAwaitingResponses() {
     return (
       <div className="card question">
-        <p><b>{this.state.text}</b></p>
+        <p><b>{this.state.questionText}</b></p>
         <FeatherIcon className="spin iconSVG" icon="loader" />
-        <div className="iconLabel">3 of 3 People Responded</div>
+        <div className="iconLabel">3 of 4 People Responded</div>
         <div className="questionActions">
-          <button className="btn">End</button>
+          <button className="btn" onClick={this.showAnswers}>End</button>
         </div>
       </div>
     );
+  }
+
+  renderQuestionWithResponses() {
+    return (
+      <div className="card question">
+        <p><b>{this.state.questionText}</b></p>
+        <ResponseBlock responses={this.state.responses} />
+        <div className="questionActions">
+          <button className="btn">Share</button>
+          <button className="btn">Rank</button>
+        </div>
+      </div>
+    );
+  }
+
+  renderFixedQuestionText() {
+    return this.state.waitingForResponses ?
+      this.renderQuestionAwaitingResponses() :
+      this.renderQuestionWithResponses();
   }
 
   render() {
