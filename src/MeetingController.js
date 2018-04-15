@@ -1,6 +1,7 @@
 
 const Meeting = require('./models/Meeting');
 const Participant = require('./models/Participant');
+const Question = require('./models/Question');
 const WebSocket = require('ws');
 
 class MeetingController {
@@ -103,7 +104,7 @@ class MeetingController {
     console.log(`Joining meeting ${meetingId}`);
     const participantId = await this.generateNewParticipantId(meetingId);
     await this._addParticipantToDB(meetingId, participantId);
-    await this.broadcastParticipants(meetingId);
+    this.broadcastParticipants(meetingId);
     httpResponse.send({
       meetingId: meetingId,
       participantId: participantId
@@ -130,6 +131,38 @@ class MeetingController {
       'participantId'
     );
     return participantModels.map(model => model.participantId);
+  }
+
+  async _addQuestionToDb(meetingId, questionText) {
+    const question = new Question({
+      meetingId:     meetingId,
+      questionText:  questionText
+    });
+    return question.save();
+  }
+
+  async addQuestion(httpRequest, httpResponse) {
+    const meetingId = parseInt(httpRequest.params.meetingId, 10);
+    const questionText = httpRequest.body.questionText;
+    const question = await this._addQuestionToDb(meetingId, questionText);
+    const questionId = question._id;
+    console.log(`Created new question ${questionId} for meeting ${meetingId}`);
+    this.broadcastQuestionText(meetingId, questionId, questionText);
+    httpResponse.send({
+      questionId: questionId
+    });
+  }
+
+  async broadcastQuestionText(meetingId, questionId, questionText) {
+    try {
+      const data = JSON.stringify({
+        questionId: questionId,
+        questionText: questionText
+      });
+      await this.broadcast(meetingId, data);
+    } catch (error) {
+      console.log(error);
+    }
   }
 }
 

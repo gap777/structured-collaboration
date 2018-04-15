@@ -35,13 +35,12 @@ class LandingPage extends Component {
 
   async joinMeeting() {
     const meetingId = this.state.inputValue;
-    const response = await fetch(
-      `/api/meeting/${meetingId}/participants`,
-      {
-        method: 'POST'
-      });
-
     try {
+      const response = await fetch(
+        `/api/meeting/${meetingId}/participants`,
+        {
+          method: 'POST'
+        });
       const json = await response.json();
       console.log(`Participant ${json.participantId} joined the meeting!`);
       sessionStorage.setItem('participantId', json.participantId.toString());

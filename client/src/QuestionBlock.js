@@ -1,51 +1,90 @@
 import React, { Component } from 'react';
 import FeatherIcon from 'feather-icons-react';
+
 class QuestionBlock extends Component {
-    constructor(){
-        super();
-        this.state = ({
-            text: ''
-        })
-    }
+  constructor(props){
+      super(props);
+      this.submitQuestion = this.submitQuestion.bind(this);
+      this.showAnswers = this.showAnswers.bind(this);
+      this.updateInputTextValue = this.updateInputTextValue.bind(this);
+      this.state = ({
+        text: this.props.questionText || '',
+        questionId: this.props.questionId
+      })
+  }
 
-    updateInputTextValue(event){
-        this.setState({
-            text: event.target.value
+  updateInputTextValue(event){
+      this.setState({
+          text: event.target.value
+      });
+  }
+
+  async _addQuestionToServer() {
+    try {
+      const response = await fetch(
+        `/api/meeting/${this.props.meetingId}/questions`,
+        {
+          method: 'POST',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            questionText: this.state.text
+          })
         });
-    }
+      const json = await response.json();
+      return json.questionId;
 
-    render() {
-        const questionBlock = (
-            <div className="card question">
-                <input type='text'
-                       placeholder="Type your question"
-                       onChange={event => this.updateInputTextValue(event)}/>
-                <div className="questionActions">
-                    <button className="btn"
-                            onClick={() => this.props.changeMode('text')}
-                    >Submit</button>
-                </div>
-            </div>);
-        const textBlock = (
-            <div className="card question">
-                <p><b>{this.state.text}</b></p>
-                <FeatherIcon className="spin iconSVG" icon="loader" />
-                <div className="iconLabel">X of X People Responded</div>
-                <div className="questionActions">
-                    <button className="btn">End</button>
-                </div>
-            </div>);
-
-        if(this.props.questionMode === true){
-            return (
-                questionBlock
-            );
-        }else{
-            return (
-                textBlock
-            );
-        }
+    } catch (err) {
+      alert('There is currently an error with the server. We apologize for your inconvenience.');
+      return;
     }
+  }
+
+  async submitQuestion() {
+    const questionId = await this._addQuestionToServer();
+    this.setState({
+      questionMode: false,
+      questionId: questionId
+    });
+  }
+
+  showAnswers() {
+
+  }
+
+  renderEditableQuestionText() {
+    return (
+      <div className="card question">
+        <input type='text'
+               placeholder="Type your question"
+               onChange={this.updateInputTextValue}/>
+        <div className="questionActions">
+          <button className="btn" onClick={this.submitQuestion}>Submit</button>
+        </div>
+      </div>
+    );
+  }
+
+  renderFixedQuestionText() {
+    return (
+      <div className="card question">
+        <p><b>{this.state.text}</b></p>
+        <FeatherIcon className="spin iconSVG" icon="loader" />
+        <div className="iconLabel">3 of 3 People Responded</div>
+        <div className="questionActions">
+          <button className="btn">End</button>
+        </div>
+      </div>
+    );
+  }
+
+  render() {
+      return this.state.questionId ?
+        this.renderFixedQuestionText() :
+        this.renderEditableQuestionText();
+  }
 }
 
 export default QuestionBlock;

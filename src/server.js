@@ -1,11 +1,15 @@
 
 const express = require('express');
-const MeetingController = require('./MeetingController');
+const bodyParser = require('body-parser');
 
 const app = express();
-const meetingController = new MeetingController();
+app.use(bodyParser.json({ limit: '20mb' }));
+app.use(bodyParser.urlencoded({ limit: '20mb', extended: true }));
 
 const SocketServer = require('ws').Server;
+
+const MeetingController = require('./MeetingController');
+const meetingController = new MeetingController();
 
 app.post(
   '/api/meeting/',
@@ -21,6 +25,12 @@ app.get(
   '/api/meeting/:meetingId/participants',
   (req, res) => meetingController.getParticipantCount(req, res)
 );
+
+app.post(
+  '/api/meeting/:meetingId/questions',
+  (req, res) => meetingController.addQuestion(req, res)
+);
+
 
 const port = process.env.PORT || 3001;
 

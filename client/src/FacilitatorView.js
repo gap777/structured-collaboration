@@ -5,25 +5,14 @@ import ParticipantSocket from './ParticipantSocket';
 import QuestionBlock from "./QuestionBlock";
 
 class FacilitatorView extends Component {
-    constructor(){
-        super();
-        this.state = ({
-            textOrQuestion : true
-        });
 
-        this.changeMode = this.changeMode.bind(this);
-    }
-    changeMode(type){
-        if(type === 'question'){
-            this.setState({
-                textOrQuestion : true
-            })
-        }else if(type === 'text'){
-            this.setState({
-                textOrQuestion: false
-            })
-        }
-    }
+  constructor(props){
+    super(props);
+    this.state = ({
+        questions : []
+    });
+    this.addQuestion = this.addQuestion.bind(this);
+  }
 
   componentWillMount() {
     const socket = new ParticipantSocket(this._meetingId());
@@ -40,6 +29,24 @@ class FacilitatorView extends Component {
     return this.props.match.params.meetingId;
   }
 
+  addQuestion() {
+    this.setState({
+      questions: [
+        {},
+        ...this.state.questions
+      ]
+    });
+  }
+
+  _renderQuestions() {
+    return this.state.questions.map((question,index) => (
+      <QuestionBlock key={index}
+                     meetingId={this._meetingId()}
+                     questionId={question.questionId}
+                     questionText={question.questionText}/>
+      ));
+  }
+
   render() {
     return (
       <React.Fragment>
@@ -48,9 +55,8 @@ class FacilitatorView extends Component {
 
             <div className="questionList">
 
-                <button className="btn" onClick={alert("creating question")}>+ Add a Question</button>
-                <QuestionBlock changeMode={this.changeMode.bind(this)}
-                               questionMode={this.state.textOrQuestion}/>
+                <button className="btn" onClick={this.addQuestion}>+ Add a Question</button>
+                {this._renderQuestions()}
 
                 <div className="card question">
                     <div className="questionTitle">
