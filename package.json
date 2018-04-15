@@ -23,9 +23,8 @@
   "homepage": "https://github.com/gap777/structured-collaboration#readme",
   "dependencies": {
     "express": "^4.16.3",
-    "feather-icons": "^4.7.0",
-    "feather-icons-react": "^0.2.0",
-    "mongoose": "^5.0.14"
+    "mongoose": "^5.0.14",
+    "ws": "^5.1.1"
   },
   "devDependencies": {
     "concurrently": "^3.5.1"

@@ -1,8 +1,30 @@
 import React, { Component } from 'react';
 import Header from './Header.js';
 import { Redirect } from 'react-router-dom';
+import FeatherIcon from 'feather-icons-react';
+import ParticipantSocket from './ParticipantSocket';
 
 class ParticipantView extends Component {
+
+  constructor(props) {
+    super(props);
+    this.updateParticipantCount = this.updateParticipantCount.bind(this);
+    this.state = {};
+  }
+
+  componentWillMount() {
+    new ParticipantSocket(this._meetingId()).connectToServer(this.updateParticipantCount);
+  }
+
+  updateParticipantCount(data) {
+    this.setState({
+      numberParticipants: data.participants
+    })
+  }
+
+  _meetingId() {
+    return this.props.match.params.meetingId;
+  }
 
   render() {
     const participantIdString = sessionStorage.getItem('participantId');
@@ -13,9 +35,14 @@ class ParticipantView extends Component {
     const participantId = parseInt(participantIdString, 10);
     return (
       <React.Fragment>
-        <Header meetingId={this.props.match.params.meetingId}/>
+        <Header numberParticipants={this.state.numberParticipants}
+                meetingId={this._meetingId()}/>
+
         {/* No Question Present*/}
-        <p>Participant {participantId}, please wait for a question....</p>
+        <div className="waitingView grey">
+            <FeatherIcon className="spin iconSVG" icon="loader" />
+            <div className="iconLabel">Hey Participant {participantId}, please wait for a question....</div>   
+        </div>
 
         {/* Question Present*/}
         <div className="card question">
@@ -26,6 +53,11 @@ class ParticipantView extends Component {
           <div className="questionActions">
             <button className="btn" >Submit</button>
           </div>
+        </div>
+        
+        <div className="waitingView grey">
+            <FeatherIcon className="spin iconSVG" icon="loader" />
+            <div className="iconLabel">Your awesome, the group responses will be here soon....</div>   
         </div>
 
 

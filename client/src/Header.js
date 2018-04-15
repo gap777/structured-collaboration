@@ -7,15 +7,26 @@ class Header extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      numberParticipants: undefined
+      numberParticipants: this.props.numberParticipants
     }
   }
 
   componentWillMount() {
-    this.getParticipants()
-        .then(participantCount => this.setState({
-          numberParticipants: participantCount
-        }));
+    if (!this.state.numberParticipants) {
+      this.getParticipants()
+          .then(participantCount => this.setState({
+            numberParticipants: participantCount
+          }));
+    }
+  }
+
+  componentWillReceiveProps(newProps) {
+
+    if (newProps.numberParticipants !== this.state.numberParticipants) {
+      this.setState({
+        numberParticipants: newProps.numberParticipants
+      });
+    }
   }
 
   async getParticipants(){
