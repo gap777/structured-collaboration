@@ -25,13 +25,13 @@ class FacilitatorView extends Component {
       ]
     });
     this.addQuestion = this.addQuestion.bind(this);
+    this.updateParticipantCount = this.updateParticipantCount.bind(this);
+    this.pushNotifier = new ParticipantSocket(this._meetingId());
+    this.pushNotifier.registerCallback(this.updateParticipantCount, 'participants');
   }
 
 
   componentWillMount() {
-    const socket = new ParticipantSocket(this._meetingId());
-    socket.handleServerUpdatesTo('participants', this.updateParticipantCount);
-
     this.fetchQuestions().then(questions => {
       this.setState({
         questions: questions

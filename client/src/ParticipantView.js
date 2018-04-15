@@ -9,12 +9,34 @@ class ParticipantView extends Component {
   constructor(props) {
     super(props);
     this.updateParticipantCount = this.updateParticipantCount.bind(this);
-
+    this.setActiveQuestion = this.setActiveQuestion.bind(this);
+    this.state = {
+      waitingForQuestion: true,
+      participantId: undefined,
+      activeQuestionText: undefined,
+      answeringQuestion: false,
+      waitingForAnswers: false
+    };
+    this.pushNotifier = new ParticipantSocket(this._meetingId());
+    this.pushNotifier.registerCallback(this.updateParticipantCount, 'participants');
+    this.pushNotifier.registerCallback(this.setActiveQuestion, 'activeQuestion');
   }
 
   componentWillMount() {
-    const socket = new ParticipantSocket(this._meetingId());
-    socket.handleServerUpdatesTo('participants', this.updateParticipantCount);
+    const participantIdString = sessionStorage.getItem('participantId');
+    if (participantIdString) {
+      this.setState({
+        participantId: parseInt(participantIdString, 10)
+      })
+    }
+  }
+
+  setActiveQuestion(question) {
+    this.setState({
+      activeQuestion: question,
+      waitingForQuestion: false,
+      answeringQuestion: true
+    });
   }
 
   updateParticipantCount(participants) {
@@ -27,42 +49,50 @@ class ParticipantView extends Component {
     return this.props.match.params.meetingId;
   }
 
+  renderWaitingForQuestion() {
+    return (
+      <div className="waitingView grey">
+        <FeatherIcon className="spin iconSVG" icon="loader" />
+        <div className="iconLabel">Hey Participant {this.state.participantId}, please wait for a question....</div>
+      </div>
+    );
+  }
+
+  renderBeingAnswered() {
+    return (
+      <div className="card question">
+        <div className="questionTitle">
+          <h1>{this.state.activeQuestion.questionText}</h1>
+        </div>
+        <input type='text' placeholder="Type your answer" />
+        <div className="questionActions">
+          <button className="btn" >Submit</button>
+        </div>
+      </div>
+    );
+  }
+
+  renderWaitingForOtherAnswers() {
+    return (
+      <div className="waitingView grey">
+        <FeatherIcon className="spin iconSVG" icon="loader" />
+        <div className="iconLabel">Your awesome, the group responses will be here soon....</div>
+      </div>
+    );
+  }
+
   render() {
-    const participantIdString = sessionStorage.getItem('participantId');
-    if (!participantIdString) {
+    if (!this.state.participantId) {
       return <Redirect to='/'/>
     }
 
-    const participantId = parseInt(participantIdString, 10);
     return (
       <React.Fragment>
         <Header numberParticipants={this.state.numberParticipants}
                 meetingId={this._meetingId()}/>
-
-        {/* No Question Present*/}
-        <div className="waitingView grey">
-            <FeatherIcon className="spin iconSVG" icon="loader" />
-            <div className="iconLabel">Hey Participant {participantId}, please wait for a question....</div>   
-        </div>
-
-        {/* Question Present*/}
-        <div className="card question">
-          <div className="questionTitle">
-            <h1>What are your biggest pain points related to this project?</h1>
-          </div>
-          <input type='text' placeholder="Type your answer" />
-          <div className="questionActions">
-            <button className="btn" >Submit</button>
-          </div>
-        </div>
-        
-        {/* Waiting for Facilitator ro share back Responses*/}
-        <div className="waitingView grey">
-            <FeatherIcon className="spin iconSVG" icon="loader" />
-            <div className="iconLabel">Your awesome, the group responses will be here soon....</div>   
-        </div>
-
-
+        {this.state.waitingForQuestion ? this.renderWaitingForQuestion() : null}
+        {this.state.answeringQuestion ? this.renderBeingAnswered() : null}
+        {this.state.waitingForAnswers ? this.renderWaitingForOtherAnswers() : null}
 
       </React.Fragment>
     );

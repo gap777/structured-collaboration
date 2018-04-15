@@ -3,27 +3,42 @@ class ParticipantSocket {
 
   constructor(meetingId) {
     this._meetingId = meetingId;
-  }
-
-  handleServerUpdatesTo(propertyOfInterest, serverEventCallback) {
+    this._callbacks = new Map();
     const webSocketProtocolString =
       window.location.protocol === 'https:' ?
         'wss://' :
         'ws://';
 
-    const webSocketUrl = `${webSocketProtocolString}${window.location.hostname}:3001?meetingId=${this._meetingId}`;
-    const webSocket = new WebSocket(webSocketUrl);
-    webSocket.onopen = function () {
-      webSocket.send("test hello!");
+    //const webSocketUrl = `${webSocketProtocolString}${window.location.hostname}:3001?meetingId=${this._meetingId}`;
+    const webSocketUrl = `${webSocketProtocolString}${window.location.hostname}:3001`;
+    this.webSocket = new WebSocket(webSocketUrl);
+    this.webSocket.onopen = () => {
+      console.log('Socket to server is open');
+      const data = JSON.stringify({
+        registerNewClient: {
+          meetingId: meetingId
+        }
+      });
+      this.webSocket.send(data);
     };
-    webSocket.onmessage = function (message) {
-      //console.log("message received: " + message.data);
-      const data = JSON.parse(message.data);
+    this.webSocket.onmessage = this._handleServerMessage.bind(this);
+  }
+
+  _handleServerMessage(message) {
+    const data = JSON.parse(message.data);
+    this._callbacks.forEach((callbacks, propertyOfInterest) => {
       const filteredData = data[propertyOfInterest];
       if (filteredData) {
-        serverEventCallback(filteredData);
+        callbacks.forEach(callback => callback(filteredData));
       }
-    };
+    });
+  }
+
+  registerCallback(serverEventCallback, propertyOfInterest) {
+    if (!this._callbacks.has(propertyOfInterest)) {
+      this._callbacks.set(propertyOfInterest, []);
+    }
+    this._callbacks.get(propertyOfInterest).push(serverEventCallback);
   }
 
 }
