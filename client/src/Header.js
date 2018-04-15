@@ -49,7 +49,7 @@ class Header extends Component {
         <div className="header">
             
             <div className="sessionBlock">
-                <FeatherIcon className="iconSVG" icon="message-circle" />
+                <FeatherIcon className="iconSVG" icon="zap" />
                 Collaboration JAM - {this.props.meetingId}
             </div>
                 
