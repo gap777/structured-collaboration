@@ -42,22 +42,60 @@ class FacilitatorView extends Component {
                     <div className="answerList">
                         <p>RESPONSES</p>
                         <div className="answer">
-                            <p>What are your biggest pain points related to this project?</p>
-                            <div className="answerActions">
-                            </div>
+                            <p>Squirrels</p>
                         </div>
                         <div className="answer">
-                            <p>What are your biggest pain points related to this project?</p>
-                            <div className="answerActions">
-                            </div>
+                            <p>Its cold outside.</p>
                         </div>
                         <div className="answer">
-                            <p>What are your biggest pain points related to this project?</p>
-                            
-                            <div className="answerActions">
-                                <FeatherIcon className="iconSVG" icon="star" />
-                            </div>
+                            <p>Not enough snacks</p>
                         </div>
+                        <div className="answer">
+                            <p>Lack of coordination</p>
+                        </div>
+                        <div className="answer">
+                            <p>I dunno</p>
+                        </div>
+                        <div className="answer">
+                            <p>Changing timelines</p>
+                        </div>
+                    </div>
+                    <div className="questionActions">
+                        <button className="btn">Share</button>
+                    </div>
+                </div>
+        
+                <div className="card question"> 
+                    <div className="questionTitle">          
+                        <h1>What are your biggest pain points related to this project?</h1>
+                    </div>
+                    <div className="answerList">
+                        <p>RESPONSES</p>
+                        <div className="answer">
+                            <p>Lack of coordination</p>
+                            <FeatherIcon className="iconSVG" icon="star" />
+                            <FeatherIcon className="iconSVG" icon="star" />
+                            <FeatherIcon className="iconSVG" icon="star" />
+                        </div>
+                        <div className="answer">
+                            <p>Changing timelines</p>
+                            <FeatherIcon className="iconSVG" icon="star" />
+                            <FeatherIcon className="iconSVG" icon="star" />
+                        </div>
+                        <div className="answer">
+                            <p>Not enough snacks</p>
+                            <FeatherIcon className="iconSVG" icon="star" />
+                        </div>
+                        <div className="answer">
+                            <p>Squirrels</p>
+                        </div>
+                        <div className="answer">
+                            <p>I dunno</p>
+                        </div>
+                        <div className="answer">
+                            <p>Its cold outside.</p>
+                        </div>
+                        
                     </div>
                     <div className="questionActions">
                         <button className="btn">Share</button>
