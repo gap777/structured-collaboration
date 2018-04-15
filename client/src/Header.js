@@ -24,7 +24,7 @@ class Header extends Component {
         {
           method: "GET"
         });
-      const json = response.json();
+      const json = await response.json();
       return json.participants;
     }
     catch (error) {
@@ -37,7 +37,7 @@ class Header extends Component {
     return (
         <div className="header">
             <p className="sessionNumber">Session# {this.props.sessionNumber}</p>
-            <p className="participantNumber">{this.state.numberParticipants || 0}</p>
+            <p className="participantNumber">Participants: {this.state.numberParticipants || 0}</p>
         </div>
     );
   }
