@@ -39,7 +39,7 @@ class Header extends Component {
             
             <div className="sessionBlock">
                 <FeatherIcon className="iconSVG" icon="message-circle" />
-                Decision JAM - {this.props.sessionNumber}
+                Decision JAM - {this.props.meetingId}
             </div>
                 
             <div className="participantBlock">
