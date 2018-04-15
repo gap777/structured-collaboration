@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './css/Header.css'
+import FeatherIcon from 'feather-icons-react';
 
 class Header extends Component {
 
@@ -36,8 +37,16 @@ class Header extends Component {
   render() {
     return (
         <div className="header">
-            <p className="sessionNumber">Session# {this.props.sessionNumber}</p>
-            <p className="participantNumber">Participants: {this.state.numberParticipants || 0}</p>
+            
+            <div className="sessionBlock">
+                <FeatherIcon icon="message-circle" />
+                Decision JAM - {this.props.sessionNumber}
+            </div>
+                
+            <div className="participantBlock">
+                <FeatherIcon icon="user" />
+                {this.state.numberParticipants || 0}
+            </div>
         </div>
     );
   }
