@@ -18,13 +18,19 @@ class Header extends Component {
   }
 
   async getParticipants(){
-    const response = await fetch(
-      "/api/meeting/:meetingId/participants",
-      {
-        method: "GET"
-      });
-    const json = response.json();
-    return json.participants;
+    try {
+      const response = await fetch(
+        "/api/meeting/:meetingId/participants",
+        {
+          method: "GET"
+        });
+      const json = response.json();
+      return json.participants;
+    }
+    catch (error) {
+      console.log(error);
+    }
+    return 0;
   }
 
   render() {
