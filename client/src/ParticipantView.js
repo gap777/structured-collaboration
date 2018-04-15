@@ -73,7 +73,9 @@ class ParticipantView extends Component {
         <div className="questionTitle">
           <h1>{this.state.activeQuestion.questionText}</h1>
         </div>
-        <input type='text' placeholder="Type your answer" />
+        <input type='text'
+               placeholder="Type your answer"
+               onChange={this.updateText}/>
         <div className="questionActions">
           <button className="btn" >Submit</button>
         </div>
@@ -112,7 +114,6 @@ class ParticipantView extends Component {
           <input
               type='text'
               placeholder="Type your answer"
-              onChange={this.updateText}
           />
           <div className="questionActions">
             <button className="btn" >Submit</button>
