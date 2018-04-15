@@ -47,7 +47,7 @@ class FacilitatorView extends Component {
 
             <div className="questionList">
 
-                <button className="btn">+ Add a Question</button>
+                <button className="btn" onClick={alert("creating question")}>+ Add a Question</button>
                 <QuestionBlock changeMode={this.changeMode.bind(this)}
                                questionMode={this.state.textOrQuestion}/>
 

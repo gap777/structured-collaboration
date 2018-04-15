@@ -30,7 +30,7 @@ class QuestionBlock extends Component {
             <div className="card question">
                 <p><b>{this.state.text}</b></p>
                 <FeatherIcon className="spin iconSVG" icon="loader" />
-                <div className="iconLabel">X of X People Responsed</div>
+                <div className="iconLabel">X of X People Responded</div>
                 <div className="questionActions">
                     <button className="btn">End</button>
                 </div>
