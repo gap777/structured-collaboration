@@ -78,21 +78,6 @@ class FacilitatorView extends Component {
                             <FeatherIcon className="iconSVG yellow" icon="star" />
                         </li>
                         <li className="answer">
-                            <p>Changing timelines</p>
-                            <FeatherIcon className="iconSVG yellow" icon="star" />
-                            <FeatherIcon className="iconSVG yellow" icon="star" />
-                        </li>
-                        <li className="answer">
-                            <p>Not enough snacks</p>
-                            <FeatherIcon className="iconSVG yellow" icon="star" />
-                        </li>
-                        <li className="answer">
-                            <FeatherIcon className="iconSVG" icon="star" />
-                            <FeatherIcon className="iconSVG" icon="star" />
-                            <FeatherIcon className="iconSVG" icon="star" />
-                        </li>
-
-                        <li className="answer">
                             <p>Not enough snacks</p>
                             <FeatherIcon className="iconSVG" icon="star" />
                             <FeatherIcon className="iconSVG" icon="star" />
