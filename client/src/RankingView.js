@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Header from './Header.js';
 import FeatherIcon from 'feather-icons-react';
 
+
 class RankingView extends Component {
     render() {
         return (
@@ -16,34 +17,45 @@ class RankingView extends Component {
                     <p className="responsesTitle">SELECT YOUR TOP 3 RESPONSES:</p>
                     <ul className="answerList">
                         <li className="answer">
-                            <label>
+                            <label class="container">
                                 <p>Squirrels</p>
-                            <input type="checkbox"/>
+                                <input type="checkbox" />
+                                <span class="checkmark"></span>
                             </label>
                         </li>
                         <li className="answer">
-                            <label><p>Its cold outside.</p>
-                            <input type="checkbox"/>
+                            <label class="container">
+                                <p>Its cold outside.</p>
+                                <input type="checkbox" />
+                                <span class="checkmark"></span>
                             </label>
                         </li>
                         <li className="answer">
-                            <label><p>Not enough snacks</p>
-                            <input type="checkbox"/>
-                            </label>
+                            <label class="container">
+                                <p>Not enough snacks</p>
+                                <input type="checkbox" />
+                                <span class="checkmark"></span>
+                            </label>                
                         </li>
                         <li className="answer">
-                            <label><p>Lack of coordination</p>
-                            <input type="checkbox"/>
-                            </label>
+                            <label class="container">
+                                <p>Lack of coordination</p>
+                                <input type="checkbox" />
+                                <span class="checkmark"></span>
+                            </label>  
                         </li>
                         <li className="answer">
-                            <label><p>I dunno</p>
-                            <input type="checkbox"/>
-                            </label>
+                            <label class="container">
+                                <p>I dunno</p>
+                                <input type="checkbox" />
+                                <span class="checkmark"></span>
+                            </label>                  
                         </li>
                         <li className="answer">
-                            <label><p>Changing timelines</p>
-                            <input type="checkbox"/>
+                             <label class="container">
+                                <p>Changing timelines</p>
+                                <input type="checkbox" />
+                                <span class="checkmark"></span>
                             </label>
                         </li>
                     </ul>
