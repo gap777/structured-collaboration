@@ -54,7 +54,6 @@ class Header extends Component {
             </div>
 
             <div className="participantBlock">
-                <button className="btn-secondary">Leave Meeting</button>
                 <FeatherIcon className="iconSVG" icon="user" />
                 {this.state.numberParticipants || 0}
             </div>
