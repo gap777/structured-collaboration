@@ -64,7 +64,11 @@ class QuestionBlock extends Component {
   }
 
   onResponseSubmitted(response) {
+    const numResponsesWithNewOne = this.state.responses.length + 1;
+    const numParticipantsExceptForFacilitator = this.props.numberParticipants - 1;
+    const waitingForResponses = numResponsesWithNewOne < numParticipantsExceptForFacilitator;
     this.setState({
+      waitingForResponses: waitingForResponses,
       responses: [...this.state.responses, response]
     });
   }

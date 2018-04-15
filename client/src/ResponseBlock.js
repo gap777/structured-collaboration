@@ -13,10 +13,10 @@ class ResponseBlock extends Component {
   }
 
   renderResponses() {
-    return this.props.responses.map((responseText, index) => {
+    return this.props.responses.map((response, index) => {
       return (
         <li key={index} className="answer">
-          <p>{responseText}</p>
+          <p>{response.responseText}</p>
         </li>
       )
     });

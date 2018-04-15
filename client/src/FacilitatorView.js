@@ -9,14 +9,14 @@ class FacilitatorView extends Component {
   constructor(props){
     super(props);
     this.state = ({
-      questions: []
+      questions: [],
+      numberParticipants: 1
     });
     this.addQuestion = this.addQuestion.bind(this);
     this.updateParticipantCount = this.updateParticipantCount.bind(this);
     this.pushNotifier = new ParticipantSocket(this._meetingId());
     this.pushNotifier.registerCallback(this.updateParticipantCount, 'participants');
   }
-
 
   componentWillMount() {
     this.fetchQuestions().then(questions => {
