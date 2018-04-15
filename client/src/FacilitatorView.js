@@ -22,8 +22,36 @@ class FacilitatorView extends Component {
                     <div className="questionTitle">          
                         <h1>What are your biggest pain points related to this project?</h1>
                     </div>
+                    <div className="questionStatus">Waiting</div>
                     <div className="questionActions">
                         <button className="btn" >End</button>
+                    </div>
+                </div>
+        
+                <div className="card question"> 
+                    <div className="questionTitle">          
+                        <h1>What are your biggest pain points related to this project?</h1>
+                    </div>
+                    <div className="answerList">
+                        <p>RESPONSES</p>
+                        <div className="answer">
+                            <p>What are your biggest pain points related to this project?</p>
+                            <div className="answerActions">
+                            </div>
+                        </div>
+                        <div className="answer">
+                            <p>What are your biggest pain points related to this project?</p>
+                            <div className="answerActions">
+                            </div>
+                        </div>
+                        <div className="answer">
+                            <p>What are your biggest pain points related to this project?</p>
+                            <div className="answerActions">
+                            </div>
+                        </div>
+                    </div>
+                    <div className="questionActions">
+                        <button className="btn">Share</button>
                     </div>
                 </div>
         
