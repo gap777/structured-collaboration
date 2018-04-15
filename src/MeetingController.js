@@ -107,8 +107,8 @@ class MeetingController {
 
   async joinMeeting(httpRequest, httpResponse) {
     const meetingId = parseInt(httpRequest.params.meetingId, 10);
-    console.log(`Joining meeting ${meetingId}`);
     const participantId = await this.generateNewParticipantId(meetingId);
+    console.log(`Participant ${participantId} joining meeting ${meetingId}`);
     await this._addParticipantToDB(meetingId, participantId);
     this.broadcastParticipants(meetingId);
     httpResponse.send({
@@ -184,10 +184,9 @@ class MeetingController {
     }
   }
 
-  async broadcastQuestionText(meetingId, questionId, questionText) {
+  async broadcastQuestionText(meetingId, question) {
     const data = JSON.stringify({
-      questionId: questionId,
-      questionText: questionText
+      activeQuestion: question
     });
     this.broadcast(meetingId, data);
   }

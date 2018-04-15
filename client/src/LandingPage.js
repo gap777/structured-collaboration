@@ -55,19 +55,21 @@ class LandingPage extends Component {
     return (
         <div className="launch">
             <div className="logoArea">
-                <FeatherIcon className="iconSVG" icon="message-circle" />
+                <FeatherIcon className="iconSVG" icon="zap" />
                 <h1>Collaboration JAM</h1>
             </div>
-            <div className="card">
-                <h1>Start a Meeting</h1>
-                <button className="btn" onClick={this.startMeeting}>Start</button>
-            </div>
-            <div className="card">
-                <h1>Join a Meeting</h1>
-                <input type='text'
-                       placeholder="Enter a meeting id"
-                       onChange={event => this.updateInputValue(event)} />
-                <button className="btn" onClick={this.joinMeeting}>Join</button>
+            <div className="beginArea">
+                <div className="card">
+                    <h1>Start a Meeting</h1>
+                    <button className="btn" onClick={this.startMeeting}>Start</button>
+                </div>
+                <div className="card">
+                    <h1>Join a Meeting</h1>
+                    <input type='text'
+                           placeholder="Enter a meeting id"
+                           onChange={event => this.updateInputValue(event)} />
+                    <button className="btn" onClick={this.joinMeeting}>Join</button>
+                </div>
             </div>
         </div>
     );
