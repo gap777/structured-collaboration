@@ -36,7 +36,7 @@ class Header extends Component {
   render() {
     return (
         <div className="header">
-            <p className="sessionNumber">Session# {this.props.sessionNumber}</p>
+            <p className="sessionNumber">Meeting# {this.props.sessionNumber}</p>
             <p className="participantNumber">Participants: {this.state.numberParticipants || 0}</p>
         </div>
     );
