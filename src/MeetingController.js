@@ -5,8 +5,22 @@ const Participant = require('./models/Participant');
 class MeetingController {
 
   generateNewMeetingId() {
-    return Math.floor(1000 + Math.random() * 9000);
+    let num = Math.floor(1000 + Math.random() * 9000);
+    while(true){
+        if(this.isMeetingNumUnique(num)){
+            return num;
+        }else{
+          num = Math.floor(1000 + Math.random() * 9000);
+        }
+    }
   }
+
+    async isMeetingNumUnique(meetingId) {
+        const numOfDuplicates = await Meeting.count(
+            {meetingId: meetingId, deleted_at: null}
+        );
+        return numOfDuplicates === 0;
+    }
 
   async generateNewParticipantId(meetingId) {
     const participantIds = await this._getParticipantsFromDB(meetingId);
