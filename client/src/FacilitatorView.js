@@ -1,9 +1,29 @@
 import React, { Component } from 'react';
 import Header from './Header.js'
 import FeatherIcon from 'feather-icons-react';
-
+import QuestionBlock from "./QuestionBlock";
 
 class FacilitatorView extends Component {
+    constructor(){
+        super();
+        this.state = ({
+            textOrQuestion : true
+        });
+
+        this.changeMode = this.changeMode.bind(this);
+    }
+    changeMode(type){
+        if(type === 'question'){
+            this.setState({
+                textOrQuestion : true
+            })
+        }else if(type === 'text'){
+            this.setState({
+                textOrQuestion: false
+            })
+        }
+    }
+
   render() {
     return (
       <React.Fragment>
@@ -13,12 +33,8 @@ class FacilitatorView extends Component {
                 
                 <button className="btn">+ Add a Question</button>
                 
-                <div className="card question"> 
-                    <input type='text' placeholder="Type your question" />
-                    <div className="questionActions">
-                        <button className="btn" >Submit</button>
-                    </div>
-                </div>
+                <QuestionBlock changeMode={this.changeMode.bind(this)}
+                               questionMode={this.state.textOrQuestion}/>
         
                 <div className="card question"> 
                     <div className="questionTitle">          
