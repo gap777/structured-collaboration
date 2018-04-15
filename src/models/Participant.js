@@ -1,19 +1,20 @@
 const mongoose = require('./base');
 const Schema = mongoose.Schema;
 
-const meetingSchema = new Schema({
+const participantSchema = new Schema({
   meetingId: Number,
+  participantId: Number,
   created_at: Date,
   updated_at: Date,
   deleted_at: Date
 });
 
-meetingSchema.pre('save', function (next) {
+participantSchema.pre('save', function (next) {
   this.created_at = this.created_at || new Date();
   this.updated_at = new Date();
   next();
 });
 
 
-module.exports = mongoose.model('Meeting', meetingSchema);
+module.exports = mongoose.model('Participant', participantSchema);
 
