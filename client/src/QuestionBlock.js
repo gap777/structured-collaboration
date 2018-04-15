@@ -91,7 +91,7 @@ class QuestionBlock extends Component {
       <div className="card question">
         <h1>{this.state.questionText}</h1>
         <FeatherIcon className="spin iconSVG" icon="loader" />
-        <div className="iconLabel">3 of 4 People Responded</div>
+        <div className="iconLabel">3 of {this.props.numOfParticipants || 0} People Responded</div>
         <div className="questionActions">
           <button className="btn" onClick={this.showAnswers}>End</button>
         </div>

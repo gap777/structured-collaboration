@@ -83,7 +83,8 @@ class FacilitatorView extends Component {
     return this.state.questions.map((question,index) => {
       return <QuestionBlock key={index}
                             meetingId={this._meetingId()}
-                            question={question}/>
+                            question={question}
+                            numOfParticipants={this.state.numberParticipants}/>
     });
   }
 
