@@ -73,22 +73,20 @@ class FacilitatorView extends Component {
                     <ul className="answerList">
                         <li className="answer">
                             <p>Lack of coordination</p>
-<<<<<<< HEAD
                             <FeatherIcon className="iconSVG yellow" icon="star" />
                             <FeatherIcon className="iconSVG yellow" icon="star" />
                             <FeatherIcon className="iconSVG yellow" icon="star" />
-                        </div>
-                        <div className="answer">
+                        </li>
+                        <li className="answer">
                             <p>Changing timelines</p>
                             <FeatherIcon className="iconSVG yellow" icon="star" />
                             <FeatherIcon className="iconSVG yellow" icon="star" />
-                        </div>
-                        <div className="answer">
+                        </li>
+                        <li className="answer">
                             <p>Not enough snacks</p>
                             <FeatherIcon className="iconSVG yellow" icon="star" />
-                        </div>
-                        <div className="answer">
-=======
+                        </li>
+                        <li className="answer">
                             <FeatherIcon className="iconSVG" icon="star" />
                             <FeatherIcon className="iconSVG" icon="star" />
                             <FeatherIcon className="iconSVG" icon="star" />
@@ -104,7 +102,6 @@ class FacilitatorView extends Component {
                             <FeatherIcon className="iconSVG" icon="star" />
                         </li>
                         <li className="answer">
->>>>>>> fbe08836af2c5c8c780630c31970070f2bec0763
                             <p>Squirrels</p>
                         </li>
                         <li className="answer">
