@@ -195,7 +195,7 @@ input[type="text"]{
 }
 
 .questionTitle{
-
+    text-align: left;
 }
 
 .questionStatus{
