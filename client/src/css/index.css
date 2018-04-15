@@ -179,12 +179,8 @@ input[type="text"]{
 .responses .answer {
     border-bottom: 1px solid #ddd;
     padding:8px 5px;
-<<<<<<< HEAD
-}
-=======
 }
 
 .responses .answer:last-child {
     border-bottom: none;
 }
->>>>>>> fbe08836af2c5c8c780630c31970070f2bec0763
