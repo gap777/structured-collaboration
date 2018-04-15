@@ -58,16 +58,14 @@ class LandingPage extends Component {
                 <FeatherIcon className="iconSVG" icon="message-circle" />
                 <h1>Decision JAM</h1>
             </div>
-            <div className="launchBlock">
+            <div className="card">
                 <h1>Start a Meeting</h1>
                 <button className="btn" onClick={this.startMeeting}>Start</button>
             </div>
-            <div className="launchBlock">
+            <div className="card">
                 <h1>Join a Meeting</h1>
-                <input type='text' onChange={event => this.updateInputValue(event)} />
-                <br/>
-                <br/>
-                <button className="btn" onClick={this.joinMeeting}>Join Meeting</button>
+                <input type='text' placeholder="Enter a meeting id" onChange={event => this.updateInputValue(event)} />
+                <button className="btn" onClick={this.joinMeeting}>Join</button>
             </div>
         </div>
     );
