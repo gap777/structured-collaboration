@@ -7,31 +7,24 @@ class ResponseView extends Component {
             <React.Fragment>
                 <Header sessionNumber={this.props.match.params.meetingId}/>
 
-                <div className="card question">
+                <div className="responses">
                     <div className="questionTitle">
                         <h1>What are your biggest pain points related to this project?</h1>
                     </div>
-                    <div className="answerList">
-                        <p>RESPONSES</p>
-                        <div className="answer">
-                            <p>What are your biggest pain points related to this project?</p>
-                            <div className="answerActions">
-                            </div>
-                        </div>
-                        <div className="answer">
-                            <p>What are your biggest pain points related to this project?</p>
-                            <div className="answerActions">
-                            </div>
-                        </div>
-                        <div className="answer">
-                            <p>What are your biggest pain points related to this project?</p>
-                            <div className="answerActions">
-                            </div>
-                        </div>
-                    </div>
-                    <div className="questionActions">
-                        <button className="btn">Share</button>
-                    </div>
+                    <p className="responsesTitle">RESPONSES:</p>
+                    <ul className="answerList">
+                        <li className="answer">
+                            <p>Response to the question</p>
+                        </li>
+                        <li className="answer">
+                            <p>Longer response to the question</p>
+
+                        </li>
+                        <li className="answer">
+                            <p>The biggest pain point is that the program is too slow.</p>
+
+                        </li>
+                    </ul>
                 </div>
             </React.Fragment>
         );
