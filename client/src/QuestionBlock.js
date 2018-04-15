@@ -99,7 +99,7 @@ class QuestionBlock extends Component {
       <div className="card question">
         <h1>{this.state.questionText}</h1>
         <FeatherIcon className="spin iconSVG" icon="loader" />
-        <div className="iconLabel">{this.state.responses.length} of {this.props.numOfParticipants - 1|| 0} participants responded</div>
+        <div className="iconLabel">{this.state.responses.length} of {this.props.numberParticipants - 1} participants responded</div>
         <div className="questionActions">
           <button className="btn" onClick={this.showAnswers}>End</button>
         </div>

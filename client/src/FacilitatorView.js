@@ -72,6 +72,7 @@ class FacilitatorView extends Component {
                             pushNotifier={this.pushNotifier}
                             meetingId={this._meetingId()}
                             question={question}
+                            numberParticipants={this.state.numberParticipants}
                             />
     });
   }
