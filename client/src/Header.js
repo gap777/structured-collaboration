@@ -20,14 +20,13 @@ class Header extends Component {
   async getParticipants(){
     try {
       const response = await fetch(
-        "/api/meeting/:meetingId/participants",
+        `/api/meeting/${this.props.match.params.meetingId}/participants`,
         {
           method: "GET"
         });
       const json = await response.json();
       return json.participants;
-    }
-    catch (error) {
+    } catch (error) {
       console.log(error);
     }
     return 0;
