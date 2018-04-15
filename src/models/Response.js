@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const responseSchema = new Schema({
   meetingId: Number,
   questionId: Number,
-  response: String,
+  responseText: String,
   created_at: Date,
   updated_at: Date,
   deleted_at: Date

@@ -22,6 +22,7 @@ class QuestionBlock extends Component {
     let stateObj;
     if (props.question) {
       stateObj = props.question;
+      stateObj.responses = props.question.responses || [];
       stateObj.waitingForResponses = false;
     } else {
       stateObj = {

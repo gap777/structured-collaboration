@@ -82,7 +82,7 @@ class ParticipantView extends Component {
             'Content-Type': 'application/json'
           },
           body: JSON.stringify({
-            response: this.state.responseText
+            responseText: this.state.responseText
           })
         });
       const json = await response.json();
@@ -144,7 +144,7 @@ class ParticipantView extends Component {
     return (
       <div className="waitingView grey">
         <FeatherIcon className="spin iconSVG" icon="loader" />
-        <div className="iconLabel">Your awesome, the group responses will be here soon....</div>
+        <div className="iconLabel">You're awesome! The group responses will be here soon....</div>
       </div>
     );
   }

@@ -220,7 +220,7 @@ class MeetingController {
     return response.save();
   }
 
-  async broadcastResponse(meetingId, response) {
+  broadcastResponse(meetingId, response) {
     const data = JSON.stringify({
       response: response
     });
