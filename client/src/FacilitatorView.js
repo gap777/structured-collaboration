@@ -27,8 +27,8 @@ class FacilitatorView extends Component {
                     
                     <div className="questionActions">
                         <div className="questionStatus yellow">
-                            <FeatherIcon className="spin" icon="loader" />
-                            <div className="iconLabel">X of X Responses Received</div>
+                            <FeatherIcon className="spin iconSVG" icon="loader" />
+                            <div className="iconLabel">X of X People Responsed</div>
                         </div>                
                         <button className="btn" >End</button>
                         
@@ -53,7 +53,9 @@ class FacilitatorView extends Component {
                         </div>
                         <div className="answer">
                             <p>What are your biggest pain points related to this project?</p>
+                            
                             <div className="answerActions">
+                                <FeatherIcon className="iconSVG" icon="star" />
                             </div>
                         </div>
                     </div>

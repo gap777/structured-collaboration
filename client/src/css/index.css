@@ -1,5 +1,5 @@
 body {
-  margin: 0;
+  margin: 80px 0 0 0;
   padding: 0;
   font-family: sans-serif;
   font-size: 14px;
@@ -62,9 +62,13 @@ input[type="text"]{
 }
 
 .iconLabel{
-    margin-top: -15px;
     display: inline-block;
-    padding-left: 8px;
+}
+
+.iconSVG{
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 10px;
 }
 
 .spin {
