@@ -25,13 +25,36 @@ class FacilitatorView extends Component {
       ]
     });
     this.addQuestion = this.addQuestion.bind(this);
+    this.updateParticipantCount = this.updateParticipantCount.bind(this);
+    this.pushNotifier = new ParticipantSocket(this._meetingId());
+    this.pushNotifier.registerCallback(this.updateParticipantCount, 'participants');
   }
 
 
   componentWillMount() {
-    const socket = new ParticipantSocket(this._meetingId());
-    socket.handleServerUpdatesTo('participants', this.updateParticipantCount);
+    this.fetchQuestions().then(questions => {
+      this.setState({
+        questions: questions
+      });
+    })
   }
+
+  async fetchQuestions() {
+    try {
+      const response = await fetch(
+        `/api/meeting/${this._meetingId()}/questions`,
+        {
+          method: 'GET'
+        });
+      const json = await response.json();
+      return json.questions;
+
+    } catch (err) {
+      alert('There is currently an error with the server. We apologize for your inconvenience.');
+      return;
+    }
+  }
+
 
   updateParticipantCount(participants) {
     this.setState({

@@ -31,6 +31,11 @@ app.post(
   (req, res) => meetingController.addQuestion(req, res)
 );
 
+app.get(
+  '/api/meeting/:meetingId/questions',
+  (req, res) => meetingController.getQuestions(req, res)
+);
+
 
 const port = process.env.PORT || 3001;
 
@@ -40,9 +45,14 @@ const server = app.listen(
 );
 
 const wss = new SocketServer({ server });
-wss.on('connection', function connection(clientSocket, httpRequest) {
-  const targetUrl = require('url').parse(httpRequest.url, true);
-  const meetingId = parseInt(targetUrl.query.meetingId, 10);
-  meetingController.registerClient(meetingId, clientSocket);
+wss.on('connection', function connection(clientSocket) {
 
+  clientSocket.on('message', function incoming(data) {
+    console.log('Message received');
+    const payload = JSON.parse(data);
+    if (payload.registerNewClient) {
+      const meetingId = parseInt(payload.registerNewClient.meetingId, 10);
+      meetingController.registerClient(meetingId, clientSocket);
+    }
+  });
 });
