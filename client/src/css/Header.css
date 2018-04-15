@@ -1,11 +1,11 @@
 .header{
-    background-color: #FFF;
-    opacity: 0.8;
     position:absolute;
     top:0;
     height: 55px;
     width: 100%;
-    border-bottom: 1px solid #3498db;
+    background-color: #FFF;
+    border-bottom: 1px solid #ddd;
+    font-size: 16px;
 }
 
 .sessionBlock{
