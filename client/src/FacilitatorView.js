@@ -59,7 +59,8 @@ class FacilitatorView extends Component {
         {
           questionId: undefined,
           questionText: undefined,
-          responses: []
+          responses: [],
+          numberParticipants: 1
         },
         ...this.state.questions
       ]
