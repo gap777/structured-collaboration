@@ -8,9 +8,6 @@ class ParticipantView extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-        text: ''
-    };
     this.updateParticipantCount = this.updateParticipantCount.bind(this);
     this.setActiveQuestion = this.setActiveQuestion.bind(this);
     this.submitResponse = this.submitResponse.bind(this);
@@ -22,7 +19,8 @@ class ParticipantView extends Component {
       activeQuestionText: undefined,
       responding: false,
       waitingForEnd: false,
-      responseText: undefined
+      responseText: '',
+      numberParticipants: 2
     };
     this.pushNotifier = new ParticipantSocket(this._meetingId());
     this.pushNotifier.registerCallback(this.updateParticipantCount, 'participants');
@@ -36,7 +34,31 @@ class ParticipantView extends Component {
         participantId: parseInt(participantIdString, 10)
       })
     }
+
+    this.fetchNumberParticipant().then(numberParticipants => {
+      this.setState({
+        numberParticipants: numberParticipants
+      });
+    })
   }
+
+  async fetchNumberParticipant() {
+    try {
+      const response = await fetch(
+        `/api/meeting/${this._meetingId()}/participants`,
+        {
+          method: 'GET'
+        });
+      const json = await response.json();
+      return json.participants;
+
+    } catch (err) {
+      alert('There is currently an error with the server. We apologize for your inconvenience.');
+      return;
+    }
+  }
+
+
 
   setActiveQuestion(question) {
     this.setState({
