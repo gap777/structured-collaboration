@@ -11,28 +11,40 @@ class RankingView extends Component {
                 {/* WITH RESPONSES */}
                 <div className="responses card">
                     <div className="questionTitle">
-                        <h1>What are your biggest pain points related to this project?</h1>
+                        <h1>This is a ranking question?</h1>
                     </div>
                     <p className="responsesTitle">SELECT YOUR TOP 3 RESPONSES:</p>
                     <ul className="answerList">
                         <li className="answer">
-                            <p>Squirrels</p>
-                            <input/>
+                            <label>
+                                <p>Squirrels</p>
+                            <input type="checkbox"/>
+                            </label>
                         </li>
                         <li className="answer">
-                            <p>Its cold outside.</p>
+                            <label><p>Its cold outside.</p>
+                            <input type="checkbox"/>
+                            </label>
                         </li>
                         <li className="answer">
-                            <p>Not enough snacks</p>
+                            <label><p>Not enough snacks</p>
+                            <input type="checkbox"/>
+                            </label>
                         </li>
                         <li className="answer">
-                            <p>Lack of coordination</p>
+                            <label><p>Lack of coordination</p>
+                            <input type="checkbox"/>
+                            </label>
                         </li>
                         <li className="answer">
-                            <p>I dunno</p>
+                            <label><p>I dunno</p>
+                            <input type="checkbox"/>
+                            </label>
                         </li>
                         <li className="answer">
-                            <p>Changing timelines</p>
+                            <label><p>Changing timelines</p>
+                            <input type="checkbox"/>
+                            </label>
                         </li>
                     </ul>
                 </div>

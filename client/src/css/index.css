@@ -145,6 +145,7 @@ input[type="text"]{
 .answer {
     text-align: left;
     height: 36px;
+    position:relative;
 }
 
 .answer p{
@@ -161,7 +162,11 @@ input[type="text"]{
     color: #3498db;
 }
 
-.answerActions{ }
+.answer input[type="checkbox"] {
+    position:absolute;
+    right: 10px;
+    top:40%;
+}
 
 .responses {
     padding: 10px 3% 20px;
