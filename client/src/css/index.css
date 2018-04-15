@@ -216,6 +216,7 @@ input[type="text"]{
 .questionStatus{
     display: inline-block;
     padding-right: 20px;
+    padding-top:30px;
 }
 
 .questionActions{
