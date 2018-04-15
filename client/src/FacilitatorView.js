@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import Header from './Header.js'
+import FeatherIcon from 'feather-icons-react';
+
 
 class FacilitatorView extends Component {
   render() {
     return (
       <React.Fragment>
-          <Header sessionNumber={this.props.match.params.meetingId}/>
             
             <div className="questionList">    
                 
@@ -22,7 +23,9 @@ class FacilitatorView extends Component {
                     <div className="questionTitle">          
                         <h1>What are your biggest pain points related to this project?</h1>
                     </div>
-                    <div className="questionStatus">Waiting</div>
+                    <div className="questionStatus">
+                        <FeatherIcon icon="clock" />
+                    </div>
                     <div className="questionActions">
                         <button className="btn" >End</button>
                     </div>
