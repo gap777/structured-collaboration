@@ -54,7 +54,7 @@ class MeetingController {
   }
 
   async joinMeeting(httpRequest, httpResponse) {
-    const meetingId = httpRequest.params.meetingId;
+    const meetingId = parseInt(httpRequest.params.meetingId, 10);
     console.log(`Joining meeting ${meetingId}`);
     const participantId = await this.generateNewParticipantId(meetingId);
     this._addParticipantToDB(meetingId, participantId);
@@ -65,7 +65,7 @@ class MeetingController {
   }
 
   async getParticipantCount(httpRequest, httpResponse) {
-    const meetingId = httpRequest.params.meetingId;
+    const meetingId = parseInt(httpRequest.params.meetingId, 10);
     let numParticipants = 0;
     try {
       const participantIds = await this._getParticipantsFromDB(meetingId);
@@ -79,10 +79,11 @@ class MeetingController {
   }
 
   async _getParticipantsFromDB(meetingId) {
-    return await Participant.find(
+    const participantModels = await Participant.find(
       {meetingId: meetingId, deleted_at: null},
       'participantId'
     );
+    return participantModels.map(model => model.participantId);
   }
 }
 

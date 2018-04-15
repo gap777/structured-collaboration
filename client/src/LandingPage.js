@@ -26,7 +26,7 @@ class LandingPage extends Component {
         const json = await response.json();
           this.props.history.push(`/${json.meetingId}/facilitate`);
       }  catch(err){
-          alert("There is currently an error with the server. We're sorry for your inconvenience.");
+          alert("There is currently an error with the server. We apologize for your inconvenience.");
           return;
       }
   }
@@ -45,7 +45,7 @@ class LandingPage extends Component {
         sessionStorage.setItem('participantId', json.participantId.toString());
         this.props.history.push(`/${meetingId}/participate`);
     }  catch(err){
-        alert("There is currently an error with the server. We're sorry for your inconvenience.");
+        alert("There is currently an error with the server. We apologize for your inconvenience.");
     }
   }
 
