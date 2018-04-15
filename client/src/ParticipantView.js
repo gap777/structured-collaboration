@@ -13,12 +13,13 @@ class ParticipantView extends Component {
   }
 
   componentWillMount() {
-    new ParticipantSocket(this._meetingId()).connectToServer(this.updateParticipantCount);
+    const socket = new ParticipantSocket(this._meetingId());
+    socket.handleServerUpdatesTo('participants', this.updateParticipantCount);
   }
 
-  updateParticipantCount(data) {
+  updateParticipantCount(participants) {
     this.setState({
-      numberParticipants: data.participants
+      numberParticipants: participants
     })
   }
 

@@ -5,7 +5,7 @@ class ParticipantSocket {
     this._meetingId = meetingId;
   }
 
-  connectToServer(serverEventCallback) {
+  handleServerUpdatesTo(propertyOfInterest, serverEventCallback) {
     const webSocketProtocolString =
       window.location.protocol === 'https:' ?
         'wss://' :
@@ -17,8 +17,12 @@ class ParticipantSocket {
       webSocket.send("test hello!");
     };
     webSocket.onmessage = function (message) {
-      console.log("message received: " + message.data);
-      serverEventCallback(JSON.parse(message.data));
+      //console.log("message received: " + message.data);
+      const data = JSON.parse(message.data);
+      const filteredData = data[propertyOfInterest];
+      if (filteredData) {
+        serverEventCallback(filteredData);
+      }
     };
   }
 
