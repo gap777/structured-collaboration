@@ -50,6 +50,16 @@ input[type="text"]{
     overflow:auto;    
 }
 
+.logoArea {
+    margin-bottom: 40px;
+}
+
+.logoArea .iconSVG{
+    width: 48px;
+    height: 48px;
+    stroke-width: 2;
+}
+
 /* Icons Shared CSS */
 .feather {
   width: 24px;
@@ -84,7 +94,7 @@ input[type="text"]{
 
 .launch{
 	margin: 0 auto;
-    width: 624px;
+    width: 80%;
     margin-top: 60px;
 }
 
@@ -145,10 +155,12 @@ input[type="text"]{
 
 .answer p{ 
     display: inline-block;
+    margin-right: 15px;
 }
 
 .answer .iconSVG{
     display: inline-block;
     vertical-align: middle;
-    margin-left: 10px;
+    stroke-width: 1;
+    fill: #FFB90F;
 }

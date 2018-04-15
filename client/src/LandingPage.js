@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import FeatherIcon from 'feather-icons-react';
 
 class LandingPage extends Component {
   constructor(props) {
@@ -52,19 +53,23 @@ class LandingPage extends Component {
   render() {
 
     return (
-      <div className="launch">
-        <div className="launchBlock">
-        	<h1>Start a Meeting</h1>
-        	<button className="btn" onClick={this.startMeeting}>Start</button>
+        <div className="launch">
+            <div className="logoArea">
+                <FeatherIcon className="iconSVG" icon="message-circle" />
+                <h1>Decision JAM</h1>
+            </div>
+            <div className="launchBlock">
+                <h1>Start a Meeting</h1>
+                <button className="btn" onClick={this.startMeeting}>Start</button>
+            </div>
+            <div className="launchBlock">
+                <h1>Join a Meeting</h1>
+                <input type='text' onChange={event => this.updateInputValue(event)} />
+                <br/>
+                <br/>
+                <button className="btn" onClick={this.joinMeeting}>Join Meeting</button>
+            </div>
         </div>
-        <div className="launchBlock">
-        	<h1>Join a Meeting</h1>
-        	<input type='text' onChange={event => this.updateInputValue(event)} />
-            <br/>
-            <br/>
-        	<button className="btn" onClick={this.joinMeeting}>Join Meeting</button>
-        </div>
-      </div>
     );
   }
 }
