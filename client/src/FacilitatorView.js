@@ -84,7 +84,8 @@ class FacilitatorView extends Component {
       return <QuestionBlock key={index}
                             pushNotifier={this.pushNotifier}
                             meetingId={this._meetingId()}
-                            question={question}/>
+                            question={question}
+                            />
     });
   }
 

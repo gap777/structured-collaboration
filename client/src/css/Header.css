@@ -6,6 +6,7 @@
     background-color: #FFF;
     border-bottom: 1px solid #ddd;
     font-size: 16px;
+    margin-bottom:40px;
 }
 
 .sessionBlock{
@@ -18,4 +19,15 @@
     position:absolute;
     top: 15px;
     right: 15px;
+}
+
+.participantAction {
+    position: absolute;
+    top:60px;
+    right:0;
+}
+
+.participantAction .btn-secondary {
+    text-align: right;
+    margin-right:0;
 }

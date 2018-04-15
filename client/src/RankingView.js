@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Header from './Header.js';
-import FeatherIcon from 'feather-icons-react';
 
 
 class RankingView extends Component {
@@ -59,6 +58,9 @@ class RankingView extends Component {
                             </label>
                         </li>
                     </ul>
+                    <div className="questionActions">
+                        <button className="btn">Submit</button>
+                    </div>
                 </div>
             </React.Fragment>
         );
