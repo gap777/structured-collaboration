@@ -33,10 +33,12 @@ h1 {
 
 input[type="text"]{
     width: 93%;
-    margin: 10px 0;
+    margin: 0px 0 10px;
     font-family: inherit;
     font-size: 100%;
     padding: 20px 3%;
+    border: 0px;
+    background-color: #FAFAFA;
 }
 
 .card {
@@ -45,16 +47,6 @@ input[type="text"]{
     box-shadow: 0px 3px 15px 0px rgba(0,0,0,0.2);
     padding: 10px 3% 20px;
     overflow:auto;    
-}
-
-.logoArea {
-    margin-bottom: 40px;
-}
-
-.logoArea .iconSVG{
-    width: 48px;
-    height: 48px;
-    stroke-width: 2;
 }
 
 /* Icons Shared CSS */
@@ -91,20 +83,31 @@ input[type="text"]{
 
 .launch{
 	margin: 0 auto;
-    width: 80%;
+    width: 100%;
     margin-top: 60px;
+    text-align:center;
+
 }
 
-.launchBlock {
-  width: 300px;
-  float: left;
-  border: 1px solid #dedede;
-
-  padding-bottom: 20px;
+.logoArea {
+    margin-bottom: 40px;
 }
 
-.launchBlock:last-child { 
-    margin-left: 20px;
+.logoArea .iconSVG{
+    width: 48px;
+    height: 48px;
+    stroke-width: 2;
+}
+
+.launch .card{
+    width: 300px;
+    margin: 10px;
+    display:inline-block;
+    vertical-align: top;
+}
+
+.launch .card:last-child { 
+    
 }
 
 /***** QUESTIONS **************/
