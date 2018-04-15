@@ -1,34 +1,24 @@
 
 const express = require('express');
+const MeetingController = require('./MeetingController');
 
 const app = express();
+const meetingController = new MeetingController();
 
-function generateNewMeetingId() {
-  return Math.floor(1000 + Math.random() * 9000);
-}
+app.post(
+  '/api/meeting/',
+  (req, res) => meetingController.createMeeting(req, res)
+);
 
-function generateNewParticipantId() {
-  return 1;
-}
+app.post(
+  '/api/meeting/:meetingId/participants',
+  (req, res) => meetingController.joinMeeting(req, res)
+);
 
-
-app.post('/api/meeting/', (req, res) => {
-  const meetingId = generateNewMeetingId();
-  console.log(`Creating new meeting ${meetingId}`);
-  res.send({
-    meetingId: meetingId
-  });
-});
-
-app.post('/api/meeting/:meetingId/participants', (req, res) => {
-  const meetingId = req.params.meetingId;
-  const participantId = generateNewParticipantId();
-  console.log(`Joining meeting ${meetingId}`);
-  res.send({
-    meetingId: meetingId,
-    participantId: participantId
-  });
-});
+app.get(
+  '/api/meeting/:meetingId/participants',
+  (req, res) => meetingController.getParticipants(req, res)
+);
 
 const port = process.env.PORT || 3001;
 
