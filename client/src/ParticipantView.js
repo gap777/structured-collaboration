@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Header from './Header.js';
 import { Redirect } from 'react-router-dom';
+import FeatherIcon from 'feather-icons-react';
 
 class ParticipantView extends Component {
 
@@ -15,7 +16,10 @@ class ParticipantView extends Component {
       <React.Fragment>
         <Header meetingId={this.props.match.params.meetingId}/>
         {/* No Question Present*/}
-        <p>Participant {participantId}, please wait for a question....</p>
+        <div className="waitingView grey">
+            <FeatherIcon className="spin iconSVG" icon="loader" />
+            <div className="iconLabel">Hey Participant {participantId}, please wait for a question....</div>   
+        </div>
 
         {/* Question Present*/}
         <div className="card question">
@@ -26,6 +30,11 @@ class ParticipantView extends Component {
           <div className="questionActions">
             <button className="btn" >Submit</button>
           </div>
+        </div>
+        
+        <div className="waitingView grey">
+            <FeatherIcon className="spin iconSVG" icon="loader" />
+            <div className="iconLabel">Your awesome, the group responses will be here soon....</div>   
         </div>
 
 

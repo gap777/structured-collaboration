@@ -61,7 +61,8 @@ class FacilitatorView extends Component {
                         </li>
                     </ul>
                     <div className="questionActions">
-                        <button className="btn">Share</button>
+                        <button className="btn">Just Share</button>
+                        <button className="btn">Send for Ranking</button>
                     </div>
                 </div>
 

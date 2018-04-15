@@ -24,6 +24,7 @@ h1 {
   padding: 10px 20px 10px 20px;
   text-decoration: none;
   border: none;
+  margin: 0 5px;
 }
 
 .btn:hover {
@@ -77,6 +78,11 @@ input[type="text"]{
 @keyframes spin {
     from {transform:rotate(0deg);}
     to {transform:rotate(360deg);}
+}
+
+.waitingView {
+    color: grey;
+    margin-top: 30px;
 }
 
 /***** LAUNCH PAGE **************/
