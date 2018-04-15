@@ -8,8 +8,10 @@ class QuestionBlock extends Component {
       super(props);
       this.submitQuestion = this.submitQuestion.bind(this);
       this.showAnswers = this.showAnswers.bind(this);
+      this.onResponseSubmitted = this.onResponseSubmitted.bind(this);
       this.updateInputTextValue = this.updateInputTextValue.bind(this);
       this.state = this.makeStateFromProps(this.props);
+      this.props.pushNotifier.registerCallback(this.onResponseSubmitted, 'response');
   }
 
   componentWillReceiveProps(newProps) {
@@ -61,6 +63,12 @@ class QuestionBlock extends Component {
     }
   }
 
+  onResponseSubmitted(response) {
+    this.setState({
+      responses: [...this.state.responses, response]
+    });
+  }
+
   async submitQuestion() {
     const questionId = await this._addQuestionToServer();
     this.setState({
@@ -91,7 +99,7 @@ class QuestionBlock extends Component {
       <div className="card question">
         <h1>{this.state.questionText}</h1>
         <FeatherIcon className="spin iconSVG" icon="loader" />
-        <div className="iconLabel">3 of {this.props.numOfParticipants || 0} People Responded</div>
+        <div className="iconLabel">{this.state.responses.length} of {this.props.numOfParticipants - 1|| 0} participants responded</div>
         <div className="questionActions">
           <button className="btn" onClick={this.showAnswers}>End</button>
         </div>

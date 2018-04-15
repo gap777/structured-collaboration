@@ -13,12 +13,16 @@ class ParticipantView extends Component {
     };
     this.updateParticipantCount = this.updateParticipantCount.bind(this);
     this.setActiveQuestion = this.setActiveQuestion.bind(this);
+    this.submitResponse = this.submitResponse.bind(this);
+    this.updateText = this.updateText.bind(this);
+
     this.state = {
       waitingForQuestion: true,
       participantId: undefined,
       activeQuestionText: undefined,
-      answeringQuestion: false,
-      waitingForAnswers: false
+      responding: false,
+      waitingForEnd: false,
+      responseText: undefined
     };
     this.pushNotifier = new ParticipantSocket(this._meetingId());
     this.pushNotifier.registerCallback(this.updateParticipantCount, 'participants');
@@ -38,8 +42,39 @@ class ParticipantView extends Component {
     this.setState({
       activeQuestion: question,
       waitingForQuestion: false,
-      answeringQuestion: true
+      responding: true
     });
+  }
+
+  async submitResponse() {
+    const meetingId = this._meetingId();
+    const questionId = this.state.activeQuestion._id;
+
+    try {
+      const response = await fetch(
+        `/api/meeting/${meetingId}/questions/${questionId}/responses/`,
+        {
+          method: 'POST',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            response: this.state.responseText
+          })
+        });
+      const json = await response.json();
+      const responseId = json.responseId;
+      console.log(`Response ${responseId} submitted for question ${questionId} in meeting ${meetingId}`);
+      this.setState({
+        responding: false,
+        responseId: responseId,
+        waitingForEnd: true
+      })
+
+    } catch (err) {
+      alert('There is currently an error with the server. We apologize for your inconvenience.');
+    }
   }
 
   updateParticipantCount(participants) {
@@ -53,9 +88,9 @@ class ParticipantView extends Component {
   }
 
   updateText(event){
-      this.setState({
-          questionText: event.target.value
-      });
+    this.setState({
+        responseText: event.target.value
+    });
   }
 
   renderWaitingForQuestion() {
@@ -67,7 +102,7 @@ class ParticipantView extends Component {
     );
   }
 
-  renderBeingAnswered() {
+  renderEditingResponse() {
     return (
       <div className="card question">
         <div className="questionTitle">
@@ -77,7 +112,7 @@ class ParticipantView extends Component {
                placeholder="Type your answer"
                onChange={this.updateText}/>
         <div className="questionActions">
-          <button className="btn" >Submit</button>
+          <button className="btn" onClick={this.submitResponse}>Submit</button>
         </div>
       </div>
     );
@@ -101,34 +136,10 @@ class ParticipantView extends Component {
       <React.Fragment>
         <Header numberParticipants={this.state.numberParticipants}
                 meetingId={this._meetingId()}/>
-        <div className="waitingView grey">
-            <FeatherIcon className="spin iconSVG" icon="loader" />
-            <div className="iconLabel">Hey Participant {this.state.participantId}, please wait for a question....</div>
-        </div>
-
-        {/* Question Present*/}
-        <div className="card question">
-          <div className="questionTitle">
-            <h1>What are your biggest pain points related to this project?</h1>
-          </div>
-          <input
-              type='text'
-              placeholder="Type your answer"
-          />
-          <div className="questionActions">
-            <button className="btn" >Submit</button>
-          </div>
-        </div>
-        
-        {/* Waiting for Facilitator ro share back Responses*/}
-        <div className="waitingView grey">
-            <FeatherIcon className="spin iconSVG" icon="loader" />
-            <div className="iconLabel">You're awesome, the group responses will be here soon....</div>
-        </div>
 
         {this.state.waitingForQuestion ? this.renderWaitingForQuestion() : null}
-        {this.state.answeringQuestion ? this.renderBeingAnswered() : null}
-        {this.state.waitingForAnswers ? this.renderWaitingForOtherAnswers() : null}
+        {this.state.responding ? this.renderEditingResponse() : null}
+        {this.state.waitingForEnd ? this.renderWaitingForOtherAnswers() : null}
 
       </React.Fragment>
     );
