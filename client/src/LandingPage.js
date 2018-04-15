@@ -56,7 +56,7 @@ class LandingPage extends Component {
         <div className="launch">
             <div className="logoArea">
                 <FeatherIcon className="iconSVG" icon="message-circle" />
-                <h1>Decision JAM</h1>
+                <h1>Collaboration JAM</h1>
             </div>
             <div className="card">
                 <h1>Start a Meeting</h1>

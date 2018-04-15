@@ -17,7 +17,6 @@ h1 {
   -webkit-border-radius: 3;
   -moz-border-radius: 3;
   border-radius: 3px;
-  font-family: Arial;
   color: #ffffff;
   font-size: 16px; 
   background: #3498db;
@@ -26,6 +25,16 @@ h1 {
   border: none;
   margin: 0 5px;
 }
+
+.btn-secondary {
+  color: #3498db;
+  font-size: 16px; 
+  text-decoration: none;
+  margin-right: 20px; 
+  background: none;
+  border: none;
+}
+
 
 .btn:hover {
   background: #3cb0fd;
@@ -154,9 +163,8 @@ input[type="text"]{
 .launch{
 	margin: 0 auto;
     width: 100%;
-    margin-top: 60px;
+    margin-top: -40px;
     text-align:center;
-
 }
 
 .logoArea {

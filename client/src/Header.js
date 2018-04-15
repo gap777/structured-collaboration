@@ -50,10 +50,13 @@ class Header extends Component {
             
             <div className="sessionBlock">
                 <FeatherIcon className="iconSVG" icon="message-circle" />
-                Decision JAM - {this.props.meetingId}
+                Collaboration JAM - {this.props.meetingId}
             </div>
                 
             <div className="participantBlock">
+                <button className="btn-secondary">End Meeting</button>
+                <button className="btn-secondary">Leave</button>
+                
                 <FeatherIcon className="iconSVG" icon="user" />
                 {this.state.numberParticipants || 0}
             </div>
