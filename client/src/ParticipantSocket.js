@@ -18,7 +18,7 @@ class ParticipantSocket {
     };
     webSocket.onmessage = function (message) {
       console.log("message received: " + message.data);
-      serverEventCallback(message.data);
+      serverEventCallback(JSON.parse(message.data));
     };
   }
 
