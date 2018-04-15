@@ -56,6 +56,7 @@ class ParticipantView extends Component {
           </div>
         </div>
         
+        {/* Waiting for Facilitator ro share back Responses*/}
         <div className="waitingView grey">
             <FeatherIcon className="spin iconSVG" icon="loader" />
             <div className="iconLabel">Your awesome, the group responses will be here soon....</div>   

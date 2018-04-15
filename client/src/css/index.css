@@ -111,7 +111,7 @@ input[type="text"]{
     -moz-box-shadow: 0px 3px 15px 0px rgba(0,0,0,0.2);
     box-shadow: 0px 3px 15px 0px rgba(0,0,0,0.2);
     padding: 10px 3% 20px;
-    overflow:auto;    
+    overflow:auto;
 }
 
 /* Icons Shared CSS */
@@ -191,10 +191,11 @@ input[type="text"]{
 .question {
     max-width: 600px;
     margin: 20px auto 0;
+    text-align: left;
 }
 
 .questionTitle{
-	text-align: left;
+
 }
 
 .questionStatus{
@@ -232,7 +233,8 @@ input[type="text"]{
     stroke-width: 1;
     fill: #FFB90F;
     margin-left: 10px;
-    color: #3498db;
+    color: #FFB90F;
+    float: right;
 }
 
 .answer input[type="checkbox"] {

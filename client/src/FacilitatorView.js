@@ -73,6 +73,7 @@ class FacilitatorView extends Component {
             <div className="questionList">
 
                 <button className="btn" onClick={this.addQuestion}>+ Add a Question</button>
+                
                 {this._renderQuestions()}
 
                 <div className="card question">

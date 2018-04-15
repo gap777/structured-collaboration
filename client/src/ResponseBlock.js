@@ -24,7 +24,7 @@ class ResponseBlock extends Component {
 
   render() {
     return (
-      <div className="card responses">
+      <div className="responses">
         <p className="responsesTitle">RESPONSES:</p>
         {this.renderResponseList()}
       </div>

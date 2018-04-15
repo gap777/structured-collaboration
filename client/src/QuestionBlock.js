@@ -89,7 +89,7 @@ class QuestionBlock extends Component {
   renderQuestionAwaitingResponses() {
     return (
       <div className="card question">
-        <p><b>{this.state.questionText}</b></p>
+        <h1>{this.state.questionText}</h1>
         <FeatherIcon className="spin iconSVG" icon="loader" />
         <div className="iconLabel">3 of 4 People Responded</div>
         <div className="questionActions">
@@ -102,7 +102,7 @@ class QuestionBlock extends Component {
   renderQuestionWithResponses() {
     return (
       <div className="card question">
-        <p><b>{this.state.questionText}</b></p>
+        <h1>{this.state.questionText}</h1>
         <ResponseBlock responses={this.state.responses} />
         <div className="questionActions">
           <button className="btn">Share</button>
