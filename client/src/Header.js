@@ -47,20 +47,20 @@ class Header extends Component {
   render() {
     return (
         <div className="header">
-            
+
             <div className="sessionBlock">
                 <FeatherIcon className="iconSVG" icon="zap" />
                 Collaboration JAM - {this.props.meetingId}
             </div>
-                
+
             <div className="participantBlock">
-                <button className="btn-secondary">End Meeting</button>
-                <button className="btn-secondary">Leave</button>
-                
                 <FeatherIcon className="iconSVG" icon="user" />
                 {this.state.numberParticipants || 0}
             </div>
-
+            <div className="participantAction">
+                {/*<button className="btn-secondary">End Meeting</button>*/}
+                <button className="btn-secondary">Leave Meeting</button>
+            </div>
         </div>
     );
   }
