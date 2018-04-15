@@ -17,9 +17,9 @@ app.post(
 
 app.get(
   '/api/meeting/:meetingId/participants',
-  (req, res) => meetingController.getParticipants(req, res)
+  (req, res) => meetingController.getParticipantCount(req, res)
 );
 
 const port = process.env.PORT || 3001;
 
-app.listen(port, () => console.log(`Example app listening on port ${port}!`));
+app.listen(port, () => console.log(`Meeting app listening on port ${port}!`));
