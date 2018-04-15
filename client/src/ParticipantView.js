@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Header from './Header.js';
-import { Redirect } from 'react-router-dom';
 
 class ParticipantView extends Component {
 
