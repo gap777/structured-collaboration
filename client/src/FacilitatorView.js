@@ -1,13 +1,36 @@
 import React, { Component } from 'react';
 import Header from './Header.js'
 import FeatherIcon from 'feather-icons-react';
+import ParticipantSocket from './ParticipantSocket';
 
 
 class FacilitatorView extends Component {
+
+  constructor(props) {
+    super(props);
+    this.updateParticipantCount = this.updateParticipantCount.bind(this);
+    this.state = {};
+  }
+
+  componentWillMount() {
+    new ParticipantSocket(this._meetingId()).connectToServer(this.updateParticipantCount);
+  }
+
+  updateParticipantCount(data) {
+    this.setState({
+      numberParticipants: data.participants
+    })
+  }
+
+  _meetingId() {
+    return this.props.match.params.meetingId;
+  }
+
   render() {
     return (
       <React.Fragment>
-          <Header meetingId={this.props.match.params.meetingId}/>
+          <Header numberParticipants={this.state.numberParticipants}
+                  meetingId={this._meetingId()}/>
 
             <div className="questionList">
 

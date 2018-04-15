@@ -1,26 +1,48 @@
 
 const Meeting = require('./models/Meeting');
 const Participant = require('./models/Participant');
+const WebSocket = require('ws');
 
 class MeetingController {
 
-  generateNewMeetingId() {
-    let num = Math.floor(1000 + Math.random() * 9000);
-    while(true){
-        if(this.isMeetingNumUnique(num)){
-            return num;
-        }else{
-          num = Math.floor(1000 + Math.random() * 9000);
-        }
-    }
+  constructor() {
+    this.clients = new Map();
   }
 
-    async isMeetingNumUnique(meetingId) {
-        const numOfDuplicates = await Meeting.count(
-            {meetingId: meetingId, deleted_at: null}
-        );
-        return numOfDuplicates === 0;
+  async generateNewMeetingId() {
+    let num;
+    do {
+      num = Math.floor(1000 + Math.random() * 9000);
+    } while(await this.isMeetingNumUnique(num) === false);
+
+    return num;
+  }
+
+  async isMeetingNumUnique(meetingId) {
+      const numOfDuplicates = await Meeting.count(
+          {meetingId: meetingId, deleted_at: null}
+      );
+      return numOfDuplicates === 0;
+  }
+
+  async broadcast(meetingId, data) {
+    const participants = this.clients.get(meetingId);
+    participants.forEach(client => {
+      if (client.readyState === WebSocket.OPEN) {
+        client.send(data);
+      }
+    })
+  }
+
+  async broadcastParticipants(meetingId) {
+    try {
+      const participantIds = await this._getParticipantsFromDB(meetingId);
+      const data = JSON.stringify({ participants: participantIds.length });
+      await this.broadcast(meetingId, data);
+    } catch (error) {
+      console.log(error);
     }
+  }
 
   async generateNewParticipantId(meetingId) {
     const participantIds = await this._getParticipantsFromDB(meetingId);
@@ -28,9 +50,15 @@ class MeetingController {
     return biggestIdentifier + 1;
   }
 
+  async registerClient(meetingId, clientSocket) {
+    const clients = this.clients.get(meetingId);
+    clients.push(clientSocket);
+    console.log(`Meeting ${meetingId} has ${clients.length} clients`);
+  }
+
   async createMeeting(httpRequest, httpResponse) {
     try {
-      const meetingId = this.generateNewMeetingId();
+      const meetingId = await this.generateNewMeetingId();
       const meetingSavePromise = this._storeMeetingInDB();
 
       const participantId = await this.generateNewParticipantId(meetingId);
@@ -39,7 +67,10 @@ class MeetingController {
       await meetingSavePromise;
       await participantSavePromise;
 
+      this.clients.set(meetingId, []);
+
       console.log(`Created new meeting ${meetingId}`);
+
       httpResponse.send({
         meetingId: meetingId,
         participantId: participantId
@@ -71,7 +102,8 @@ class MeetingController {
     const meetingId = parseInt(httpRequest.params.meetingId, 10);
     console.log(`Joining meeting ${meetingId}`);
     const participantId = await this.generateNewParticipantId(meetingId);
-    this._addParticipantToDB(meetingId, participantId);
+    await this._addParticipantToDB(meetingId, participantId);
+    await this.broadcastParticipants(meetingId);
     httpResponse.send({
       meetingId: meetingId,
       participantId: participantId
