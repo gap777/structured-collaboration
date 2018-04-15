@@ -58,6 +58,10 @@ class MeetingController {
   }
 
   async registerClient(meetingId, clientSocket) {
+
+    if (!this.clients.has(meetingId)) {
+      this.clients.set(meetingId, []);
+    }
     const clients = this.clients.get(meetingId);
     clients.push(clientSocket);
     console.log(`Meeting ${meetingId} has ${clients.length} clients`);
@@ -73,9 +77,7 @@ class MeetingController {
 
       await meetingSavePromise;
       await participantSavePromise;
-
-      this.clients.set(meetingId, []);
-
+      
       console.log(`Created new meeting ${meetingId}`);
 
       httpResponse.send({
