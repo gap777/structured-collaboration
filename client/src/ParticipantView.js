@@ -8,6 +8,9 @@ class ParticipantView extends Component {
 
   constructor(props) {
     super(props);
+    this.state = {
+        text: ''
+    };
     this.updateParticipantCount = this.updateParticipantCount.bind(this);
     this.state = {};
   }
@@ -27,6 +30,11 @@ class ParticipantView extends Component {
     return this.props.match.params.meetingId;
   }
 
+  updateText(event){
+      this.setState({
+          questionText: event.target.value
+      });
+  }
   render() {
     const participantIdString = sessionStorage.getItem('participantId');
     if (!participantIdString) {
@@ -50,7 +58,11 @@ class ParticipantView extends Component {
           <div className="questionTitle">
             <h1>What are your biggest pain points related to this project?</h1>
           </div>
-          <input type='text' placeholder="Type your answer" />
+          <input
+              type='text'
+              placeholder="Type your answer"
+              onChange={this.updateText}
+          />
           <div className="questionActions">
             <button className="btn" >Submit</button>
           </div>
