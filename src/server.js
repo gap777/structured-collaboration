@@ -36,6 +36,10 @@ app.get(
   (req, res) => meetingController.getQuestions(req, res)
 );
 
+app.post(
+  '/api/meeting/:meetingId/questions/:questionId/responses',
+  (req, res) => meetingController.addResponse(req, res)
+);
 
 const port = process.env.PORT || 3001;
 

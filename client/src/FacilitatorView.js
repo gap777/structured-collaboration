@@ -82,6 +82,7 @@ class FacilitatorView extends Component {
   _renderQuestions() {
     return this.state.questions.map((question,index) => {
       return <QuestionBlock key={index}
+                            pushNotifier={this.pushNotifier}
                             meetingId={this._meetingId()}
                             question={question}/>
     });

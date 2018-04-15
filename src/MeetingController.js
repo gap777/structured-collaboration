@@ -154,7 +154,7 @@ class MeetingController {
       const question = await this._addQuestionToDb(meetingId, questionText);
       const questionId = question._id;
       console.log(`Created new question ${questionId} for meeting ${meetingId}`);
-      this.broadcastQuestionText(meetingId, questionId, questionText);
+      this.broadcastQuestion(meetingId, question);
       httpResponse.send({
         questionId: questionId
       });
@@ -184,9 +184,43 @@ class MeetingController {
     }
   }
 
-  async broadcastQuestionText(meetingId, question) {
+  async broadcastQuestion(meetingId, question) {
     const data = JSON.stringify({
       activeQuestion: question
+    });
+    this.broadcast(meetingId, data);
+  }
+
+  async addResponse(httpRequest, httpResponse) {
+    const meetingId = parseInt(httpRequest.params.meetingId, 10);
+    const questionId = parseInt(httpRequest.params.questionId, 10);
+    const responseText = httpRequest.body.responseText;
+
+    try {
+      const response = await this._addResponseToDb(meetingId, questionId, responseText);
+      const responseId = response._id;
+      console.log(`Created new response ${responseId} for question ${questionId} in meeting ${meetingId}`);
+      this.broadcastResponse(meetingId, response);
+      httpResponse.send({
+        responseId: responseId
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async _addResponseToDb(meetingId, questionId, responseText) {
+    const response = new Response({
+      meetingId:     meetingId,
+      questionId:    questionId,
+      responseText:  responseText
+    });
+    return response.save();
+  }
+
+  async broadcastResponse(meetingId, response) {
+    const data = JSON.stringify({
+      response: response
     });
     this.broadcast(meetingId, data);
   }
