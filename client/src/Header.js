@@ -3,23 +3,44 @@ import './css/Header.css'
 
 class Header extends Component {
 
-    async getParticipants(){
-        const response = await fetch(
-            "/api/meeting/:meetingId/participants",
-            {
-                method: "GET"
-            });
-        return response;
+  constructor(props) {
+    super(props);
+    this.state = {
+      numberParticipants: undefined
     }
+  }
 
-    render() {
-        return (
-            <div className="header">
-                <p className="sessionNumber">Session# {this.props.sessionNumber}</p>
-                <p className="participantNumber">{this.getParticipants()}</p>
-            </div>
-        );
+  componentWillMount() {
+    this.getParticipants()
+        .then(participantCount => this.setState({
+          numberParticipants: participantCount
+        }));
+  }
+
+  async getParticipants(){
+    try {
+      const response = await fetch(
+        "/api/meeting/:meetingId/participants",
+        {
+          method: "GET"
+        });
+      const json = await response.json();
+      return json.participants;
     }
+    catch (error) {
+      console.log(error);
+    }
+    return 0;
+  }
+
+  render() {
+    return (
+        <div className="header">
+            <p className="sessionNumber">Session# {this.props.sessionNumber}</p>
+            <p className="participantNumber">Participants: {this.state.numberParticipants || 0}</p>
+        </div>
+    );
+  }
 }
 
 export default Header;

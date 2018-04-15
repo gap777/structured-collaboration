@@ -7,8 +7,9 @@ class FacilitatorView extends Component {
   render() {
     return (
       <React.Fragment>
-            
-            <div className="questionList">    
+          <Header sessionNumber={this.props.match.params.meetingId}/>
+
+            <div className="questionList">
                 
                 <button className="btn">+ Add a Question</button>
                 
