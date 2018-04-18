@@ -1,10 +1,13 @@
 
 const express = require('express');
 const bodyParser = require('body-parser');
+const path = require('path');
 
 const app = express();
 app.use(bodyParser.json({ limit: '20mb' }));
 app.use(bodyParser.urlencoded({ limit: '20mb', extended: true }));
+
+app.use(express.static(path.join(__dirname, '../client/build')));
 
 const SocketServer = require('ws').Server;
 
@@ -40,6 +43,10 @@ app.post(
   '/api/meeting/:meetingId/questions/:questionId/responses',
   (req, res) => meetingController.addResponse(req, res)
 );
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname + '../client/build/index.html'));
+});
 
 const port = process.env.PORT || 3001;
 
